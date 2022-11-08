@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsqv7hl8eu5hm"]
+
+[ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_i1438"]
+[ext_resource type="Texture2D" uid="uid://blxmwr4rq2n6j" path="res://icon.svg" id="2_6i5qd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eymji"]
+size = Vector2(131, 129)
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(64, 65)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_i1438")
+
+[node name="body" type="Sprite2D" parent="."]
+texture = ExtResource("2_6i5qd")
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_eymji")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+top_level = true
+position = Vector2(64, 67)
+target_position = Vector2(400, 0)
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(0, 2)
+width = 2.0
+default_color = Color(1, 0, 0, 1)
