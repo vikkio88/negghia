@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsqv7hl8eu5hm"]
+[gd_scene load_steps=5 format=3 uid="uid://bsqv7hl8eu5hm"]
 
 [ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_i1438"]
 [ext_resource type="Texture2D" uid="uid://blxmwr4rq2n6j" path="res://icon.svg" id="2_6i5qd"]
+[ext_resource type="PackedScene" uid="uid://dfgt0l21jn7nd" path="res://scenes/items/weapons/rifle.tscn" id="3_7f27a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eymji"]
 size = Vector2(131, 129)
@@ -18,12 +19,10 @@ texture = ExtResource("2_6i5qd")
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_eymji")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-top_level = true
-position = Vector2(64, 67)
-target_position = Vector2(400, 0)
+[node name="hand" type="Node2D" parent="."]
+position = Vector2(34, 20)
+z_index = -1
 
-[node name="Line2D" type="Line2D" parent="."]
-position = Vector2(0, 2)
-width = 2.0
-default_color = Color(1, 0, 0, 1)
+[node name="rifle" parent="hand" instance=ExtResource("3_7f27a")]
+position = Vector2(-4, 8)
+scale = Vector2(3, 3)
