@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 const MIN_AIM_DISTANCE: float = 100.0
 
-@onready var Hand: Node2D = $hand/aimcast
+@onready var Hand: Node2D = $hand
+@onready var Anims: AnimationPlayer = $animations
 
 
 @export var _speed:float = 100.0
@@ -11,6 +12,10 @@ var _speed_malus: float = 1.0
 
 var _is_sprinting = false
 var _is_aiming = false
+
+func _ready() -> void:
+	Anims.play("idle_right")
+	velocity = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	reset_conditions()
@@ -26,19 +31,30 @@ func _physics_process(delta: float) -> void:
 	if direction_y or direction_x:
 		var direction = Vector2(direction_x, direction_y)
 		velocity = direction.normalized() * get_speed()
-
+		
+	if velocity == Vector2.ZERO:
+		Anims.play("idle_right" if not _is_aiming else "still")
 	else:
-		velocity.x = move_toward(velocity.x, 0, get_speed())
-		velocity.y = move_toward(velocity.y, 0, get_speed())
+		Anims.play("walk_right", -1, get_walking_speed())
+	
+	if not _is_sprinting and Input.is_action_just_released("shoot") and can_aim():
+		Hand.shoot()
+	
 
 	move_and_slide()
-	if global_position.distance_to(get_aimed_point()) > MIN_AIM_DISTANCE:
-		look_at(get_aimed_point())
+	adjust_orientation()
+
+func adjust_orientation() -> void:
+	if get_aimed_point().x < global_position.x:
+		$body.set_flip_h(true)
+	else:
+		$body.set_flip_h(false)
 
 func get_aimed_point()-> Vector2:
 	return get_global_mouse_position()
 
 func reset_conditions()->void:
+	velocity = Vector2.ZERO
 	_is_sprinting = false
 	_is_aiming = false
 	$hand/rifle.set_aim(false)
@@ -48,10 +64,18 @@ func can_aim() -> bool:
 	return global_position.distance_to(get_aimed_point()) > MIN_AIM_DISTANCE
 
 func aim()->void:
-	_speed_malus = .3
+	_speed_malus = .15
 	_is_aiming = true
 	$hand/rifle.set_aim(true)
 
 
 func get_speed()-> float:
 	return (_speed * (1 if not _is_sprinting else 2.8)) *  _speed_malus
+
+func get_walking_speed() -> float:
+	if _is_sprinting:
+		return 1.5
+	elif _is_aiming:
+		return .5
+	
+	return 1.0

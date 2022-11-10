@@ -1,33 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfgt0l21jn7nd"]
+[gd_scene load_steps=3 format=3 uid="uid://dfgt0l21jn7nd"]
 
 [ext_resource type="Script" path="res://scenes/items/weapons/rifle.gd" id="1_44ssp"]
 [ext_resource type="Texture2D" uid="uid://b2vlirb3dn6hi" path="res://assets/m1garand.png" id="1_v1npo"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3njhb"]
-size = Vector2(67, 10)
-
 [node name="rifle" type="Node2D"]
 script = ExtResource("1_44ssp")
 
-[node name="body" type="RigidBody2D" parent="."]
-
-[node name="collision" type="CollisionShape2D" parent="body"]
-position = Vector2(-2, 0)
-shape = SubResource("RectangleShape2D_3njhb")
-
 [node name="sprite" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(5, 0)
 texture = ExtResource("1_v1npo")
 
-[node name="aimcast" type="RayCast2D" parent="sprite"]
-position = Vector2(31, -2)
-rotation = -1.5708
-target_position = Vector2(0, 200)
+[node name="muzzle" type="Node2D" parent="sprite"]
+position = Vector2(32, -2)
 
-[node name="aimline" type="Line2D" parent="sprite"]
+[node name="aimline" type="Line2D" parent="sprite/muzzle"]
+position = Vector2(-32, 0)
 points = PackedVector2Array(31, -2, 56.3243, -2, 230, -2)
 width = 1.0
 default_color = Color(1, 0, 0, 1)
 
-[node name="muzzle" type="Node2D" parent="."]
-position = Vector2(32, -1)
+[node name="aimcast" type="RayCast2D" parent="sprite/muzzle/aimline"]
+position = Vector2(31, 0)
+rotation = -1.5708
+target_position = Vector2(200, 0)

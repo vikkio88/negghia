@@ -1,11 +1,101 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsqv7hl8eu5hm"]
+[gd_scene load_steps=12 format=3 uid="uid://bsqv7hl8eu5hm"]
 
 [ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_i1438"]
-[ext_resource type="Texture2D" uid="uid://blxmwr4rq2n6j" path="res://icon.svg" id="2_6i5qd"]
+[ext_resource type="Texture2D" uid="uid://b0cmpc34lktjp" path="res://assets/testnegghia.png" id="2_8dboy"]
 [ext_resource type="PackedScene" uid="uid://dfgt0l21jn7nd" path="res://scenes/items/weapons/rifle.tscn" id="3_7f27a"]
+[ext_resource type="Script" path="res://scenes/actors/hand.gd" id="3_hthc7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eymji"]
-size = Vector2(131, 129)
+size = Vector2(72, 200)
+
+[sub_resource type="Animation" id="Animation_mxuuk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wqtsb"]
+resource_name = "idle_left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 8]
+}
+
+[sub_resource type="Animation" id="Animation_ieqg6"]
+resource_name = "idle_right"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 8, 8]
+}
+
+[sub_resource type="Animation" id="Animation_cye83"]
+resource_name = "still"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_eo1vn"]
+resource_name = "walk_right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3oi42"]
+_data = {
+"RESET": SubResource("Animation_mxuuk"),
+"idle_left": SubResource("Animation_wqtsb"),
+"idle_right": SubResource("Animation_ieqg6"),
+"still": SubResource("Animation_cye83"),
+"walk_right": SubResource("Animation_eo1vn")
+}
 
 [node name="player" type="CharacterBody2D"]
 position = Vector2(64, 65)
@@ -13,16 +103,25 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("1_i1438")
 
 [node name="body" type="Sprite2D" parent="."]
-texture = ExtResource("2_6i5qd")
+scale = Vector2(10, 10)
+texture = ExtResource("2_8dboy")
+hframes = 3
+vframes = 3
 
 [node name="collider" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -0.5)
+position = Vector2(-4, 20)
 shape = SubResource("RectangleShape2D_eymji")
 
 [node name="hand" type="Node2D" parent="."]
-position = Vector2(34, 20)
-z_index = -1
+position = Vector2(0, 30)
+script = ExtResource("3_hthc7")
 
 [node name="rifle" parent="hand" instance=ExtResource("3_7f27a")]
-position = Vector2(-4, 8)
+position = Vector2(4, 2)
 scale = Vector2(3, 3)
+
+[node name="animations" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_3oi42")
+}

@@ -1,14 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://c61yd7lnyhp5q"]
+[gd_scene load_steps=3 format=3 uid="uid://c61yd7lnyhp5q"]
 
 [ext_resource type="PackedScene" uid="uid://bsqv7hl8eu5hm" path="res://scenes/actors/player.tscn" id="1_5q1xi"]
+[ext_resource type="PackedScene" uid="uid://dswcvvcek57fr" path="res://scenes/actors/dummy.tscn" id="2_f870b"]
 
 [node name="TestArea" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("1_5q1xi")]
-position = Vector2(75, 73)
+position = Vector2(523, 244)
 
 [node name="pos" type="Label" parent="."]
 offset_left = 1103.0
 offset_top = 4.0
 offset_right = 1143.0
 offset_bottom = 27.0
+
+[node name="dummy" parent="." instance=ExtResource("2_f870b")]
+position = Vector2(1025, 411)
