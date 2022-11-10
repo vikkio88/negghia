@@ -3,7 +3,7 @@ extends RigidBody2D
 var _starting_point: Vector2
 
 const MAX_DISTANCE:float = 2000
-const DEVIATION_MULTIPLIER = 0.08
+const DEVIATION_MULTIPLIER = 0.05
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,5 +26,6 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_area_body_entered(body: Node2D) -> void:
-	print("hit something")
+	if body.has_method("hit"):
+		body.hit(global_position)
 	queue_free()

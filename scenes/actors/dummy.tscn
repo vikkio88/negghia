@@ -1,16 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dswcvvcek57fr"]
+[gd_scene load_steps=5 format=3 uid="uid://dswcvvcek57fr"]
 
 [ext_resource type="Texture2D" uid="uid://dgq1aib4pd0af" path="res://assets/dummy.png" id="1_x2nwe"]
+[ext_resource type="Script" path="res://scenes/actors/dummy.gd" id="1_xvyg5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c4tic"]
 radius = 24.0
 height = 96.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xrsdn"]
-radius = 16.0
-height = 32.0
+radius = 14.0
+height = 28.0
 
 [node name="dummy" type="RigidBody2D"]
+script = ExtResource("1_xvyg5")
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_x2nwe")
@@ -20,5 +22,8 @@ position = Vector2(1, 16)
 shape = SubResource("CapsuleShape2D_c4tic")
 
 [node name="head" type="CollisionShape2D" parent="."]
-position = Vector2(0, -45)
+position = Vector2(0, -46)
 shape = SubResource("CapsuleShape2D_xrsdn")
+
+[node name="placeholder" type="Node2D" parent="."]
+position = Vector2(0, -69)
