@@ -4,6 +4,7 @@ var _starting_point: Vector2
 
 const MAX_DISTANCE:float = 2000
 const DEVIATION_MULTIPLIER = 0.05
+@onready var hole_scene = preload("res://scenes/items/bullethole.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +27,10 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_area_body_entered(body: Node2D) -> void:
+	set_freeze_enabled(true)
 	if body.has_method("hit"):
 		body.hit(global_position)
+		var hole = hole_scene.instantiate()
+		body.add_child(hole)
+		hole.global_position = global_position
 	queue_free()

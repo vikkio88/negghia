@@ -2,8 +2,12 @@ extends CharacterBody2D
 
 const MIN_AIM_DISTANCE: float = 100.0
 
+@onready var ftext = preload("res://scenes/hud/floating_text.tscn")
+
+@onready var Body: Sprite2D = $body
 @onready var Hand: Node2D = $hand
 @onready var Anims: AnimationPlayer = $animations
+@onready var floatph: Node2D = $floatph
 
 
 @export var _speed:float = 100.0
@@ -39,6 +43,16 @@ func _physics_process(delta: float) -> void:
 	
 	if not _is_sprinting and Input.is_action_just_released("shoot") and can_aim():
 		Hand.shoot()
+	elif not _is_sprinting and Input.is_action_just_released("reload"):
+		var t = ftext.instantiate()
+		floatph.add_child(t)
+		t.trigger("Reloading")
+		Hand.reload()
+	
+	if Input.is_action_just_released("q") and Hand.has_gun():
+		var t = ftext.instantiate()
+		floatph.add_child(t)
+		t.trigger("%d / %d" % [Hand.check_ammo(), Hand.max_ammo()])
 	
 
 	move_and_slide()
@@ -46,9 +60,9 @@ func _physics_process(delta: float) -> void:
 
 func adjust_orientation() -> void:
 	if get_aimed_point().x < global_position.x:
-		$body.set_flip_h(true)
+		Body.set_flip_h(true)
 	else:
-		$body.set_flip_h(false)
+		Body.set_flip_h(false)
 
 func get_aimed_point()-> Vector2:
 	return get_global_mouse_position()
@@ -57,7 +71,7 @@ func reset_conditions()->void:
 	velocity = Vector2.ZERO
 	_is_sprinting = false
 	_is_aiming = false
-	$hand/rifle.set_aim(false)
+	Hand.set_aim(false)
 	_speed_malus = 1.0
 
 func can_aim() -> bool:
@@ -66,7 +80,7 @@ func can_aim() -> bool:
 func aim()->void:
 	_speed_malus = .15
 	_is_aiming = true
-	$hand/rifle.set_aim(true)
+	Hand.set_aim(true)
 
 
 func get_speed()-> float:

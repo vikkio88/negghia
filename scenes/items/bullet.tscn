@@ -20,6 +20,7 @@ collision_layer = 0
 collision_mask = 7
 
 [node name="collider" type="CollisionShape2D" parent="area"]
+position = Vector2(10, 3.62396e-05)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_0og48")
 
@@ -27,9 +28,5 @@ shape = SubResource("CapsuleShape2D_0og48")
 rotation = 1.5708
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_h46oj")
-
-[node name="collider" type="CollisionShape2D" parent="."]
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_0og48")
 
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]

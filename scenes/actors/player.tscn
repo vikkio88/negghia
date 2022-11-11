@@ -113,11 +113,10 @@ position = Vector2(-4, 20)
 shape = SubResource("RectangleShape2D_eymji")
 
 [node name="hand" type="Node2D" parent="."]
-position = Vector2(0, 30)
+position = Vector2(10, 44)
 script = ExtResource("3_hthc7")
 
 [node name="rifle" parent="hand" instance=ExtResource("3_7f27a")]
-position = Vector2(4, 2)
 scale = Vector2(3, 3)
 
 [node name="animations" type="AnimationPlayer" parent="."]
@@ -125,3 +124,11 @@ reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_3oi42")
 }
+
+[node name="floatph" type="Node2D" parent="."]
+position = Vector2(0, -100)
+scale = Vector2(2, 2)
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(26, -228)
+current = true
