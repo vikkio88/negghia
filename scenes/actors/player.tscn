@@ -128,7 +128,3 @@ libraries = {
 [node name="floatph" type="Node2D" parent="."]
 position = Vector2(0, -100)
 scale = Vector2(2, 2)
-
-[node name="camera" type="Camera2D" parent="."]
-position = Vector2(26, -228)
-current = true

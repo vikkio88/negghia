@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var gun: Node2D = null
-@onready var Camera: Camera2D = $"../camera"
 
 var ads_lerp = 10
 var aim_default = Vector2(10,44)

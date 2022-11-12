@@ -15,6 +15,10 @@ run/main_scene="res://scenes/levels/test_area.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EventsBus="*res://scripts/EventsBus.gd"
+
 [display]
 
 window/size/viewport_width=1700

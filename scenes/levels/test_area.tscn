@@ -16,11 +16,9 @@ position = Vector2(324, 412)
 [node name="player" parent="." instance=ExtResource("1_5q1xi")]
 position = Vector2(523, 244)
 
-[node name="pos" type="Label" parent="."]
-offset_left = 1103.0
-offset_top = 4.0
-offset_right = 1143.0
-offset_bottom = 27.0
+[node name="main_camera" type="Camera2D" parent="player"]
+position = Vector2(0, -500)
+current = true
 
 [node name="dummy" parent="." instance=ExtResource("2_f870b")]
 position = Vector2(1025, 411)
