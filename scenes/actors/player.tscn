@@ -117,7 +117,6 @@ position = Vector2(10, 44)
 script = ExtResource("3_hthc7")
 
 [node name="rifle" parent="hand" instance=ExtResource("3_7f27a")]
-scale = Vector2(3, 3)
 
 [node name="animations" type="AnimationPlayer" parent="."]
 reset_on_save = false

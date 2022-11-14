@@ -2,7 +2,7 @@ extends RigidBody2D
 
 @onready var ftext = preload("res://scenes/hud/floating_text.tscn")
 
-@onready var body : CollisionShape2D = $body
+@onready var body: CollisionShape2D = $body
 @onready var head: CollisionShape2D = $head
 @onready var dmg_placeholder: Node2D = $placeholder
 
