@@ -13,5 +13,5 @@ func _on_playerdetector_body_exited(body: Node2D) -> void:
 
 
 func pick_up() -> void:
-	EventsBus.emit_signal("gun_pickup", "rifle")
+	EventsBus.emit_signal("gun_pickup", Enums.Weapons.Rifle)
 	queue_free()

@@ -18,6 +18,7 @@ const MAX_AMMO: int = 5
 
 @onready var bullet = preload("res://scenes/items/bullet.tscn")
 
+var Type: Enums.Weapons = Enums.Weapons.Rifle
 var _ammo: int = 5
 
 var _is_aiming: bool = false
