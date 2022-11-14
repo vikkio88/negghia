@@ -64,13 +64,6 @@ func has_gun() -> bool:
 	return gun != null
 
 
-func release_gun() -> void:
-	if has_gun():
-		EventsBus.emit_signal("gun_dropped", )
-		remove_child(gun)
-		gun = null
-
-
 func get_aimed_point() -> Vector2:
 	return get_global_mouse_position()
 
@@ -80,3 +73,10 @@ func pickup_gun(type: Enums.Weapons) -> void:
 		var rifle = rifle_scene.instantiate()
 		add_child(rifle)
 		gun = rifle
+
+
+func release_gun() -> void:
+	if has_gun():
+		EventsBus.emit_signal("gun_dropped", gun.Type, global_position)
+		remove_child(gun)
+		gun = null
