@@ -53,6 +53,7 @@ func aim() -> void:
 	Line.add_point(get_local_mouse_position())
 
 func shoot() -> Vector2:
+	
 	if not _can_fire:
 		return Vector2.ZERO
 	
