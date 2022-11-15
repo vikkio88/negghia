@@ -9,12 +9,24 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "Node",
+"base": "Node2D",
+"class": &"BasePickable",
+"language": &"GDScript",
+"path": "res://scenes/items/pickable.gd"
+}, {
+"base": "Node2D",
+"class": &"BaseWeapon",
+"language": &"GDScript",
+"path": "res://scenes/items/weapons/base_weapon.gd"
+}, {
+"base": "RefCounted",
 "class": &"Enums",
 "language": &"GDScript",
 "path": "res://scripts/Enums.gd"
 }]
 _global_script_class_icons={
+"BasePickable": "",
+"BaseWeapon": "",
 "Enums": ""
 }
 
@@ -28,6 +40,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventsBus="*res://scripts/EventsBus.gd"
+ItemFactory="*res://scripts/ItemFactory.gd"
 
 [display]
 

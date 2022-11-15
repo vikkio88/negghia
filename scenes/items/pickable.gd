@@ -1,12 +1,15 @@
 extends Node2D
+class_name BasePickable
 
 @onready var Sprite = $sprite
+@export var type: Enums.Weapons
+
+const DROP_LERP: int = 10
+const DROP_RANGE: int = 200
+
 
 var _dropping: bool = false
 var _to_pos: Vector2 = Vector2.ZERO
-var ads_lerp = 5
-
-var DROP_RANGE = 200
 
 
 func init(position: Vector2, dropped: bool = false) -> void:
@@ -23,7 +26,7 @@ func init(position: Vector2, dropped: bool = false) -> void:
 
 func _physics_process(delta):
 	if _dropping:
-		position = position.lerp(_to_pos, ads_lerp * delta)
+		position = position.lerp(_to_pos, DROP_LERP * delta)
 
 	if position.distance_to(_to_pos) <= 3:
 		_dropping = false
@@ -42,5 +45,5 @@ func _on_playerdetector_body_exited(body: Node2D) -> void:
 func pick_up() -> void:
 	if _dropping:
 		return
-	EventsBus.emit_signal("gun_pickup", Enums.Weapons.Rifle)
+	EventsBus.emit_signal("gun_pickup", type)
 	queue_free()

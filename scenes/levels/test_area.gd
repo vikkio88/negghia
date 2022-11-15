@@ -2,7 +2,6 @@ extends Node2D
 
 # Load the custom images for the mouse cursor.
 @onready var arrow = preload("res://assets/cross.png")
-@onready var pickable_scene = preload("res://scenes/items/pickable.tscn")
 
 
 func _ready() -> void:
@@ -21,7 +20,6 @@ func _ready() -> void:
 
 
 func spawn_gun(type: Enums.Weapons, position: Vector2):
-	if type == Enums.Weapons.Rifle:
-		var rifle = pickable_scene.instantiate()
-		rifle.init(position, true)
-		add_child(rifle)
+	var weapon = ItemFactory.make_pickable_weapon(type).instantiate()
+	weapon.init(position, true)
+	add_child(weapon)

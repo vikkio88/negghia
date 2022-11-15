@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_i1438"]
 [ext_resource type="Texture2D" uid="uid://b0cmpc34lktjp" path="res://assets/testnegghia.png" id="2_8dboy"]
-[ext_resource type="PackedScene" uid="uid://dfgt0l21jn7nd" path="res://scenes/items/weapons/rifle.tscn" id="3_7f27a"]
 [ext_resource type="Script" path="res://scenes/actors/hand.gd" id="3_hthc7"]
+[ext_resource type="PackedScene" uid="uid://imp67aqtytjb" path="res://scenes/items/weapons/pistol.tscn" id="4_13orm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eymji"]
 size = Vector2(72, 200)
@@ -116,7 +116,8 @@ shape = SubResource("RectangleShape2D_eymji")
 position = Vector2(10, 44)
 script = ExtResource("3_hthc7")
 
-[node name="rifle" parent="hand" instance=ExtResource("3_7f27a")]
+[node name="pistol" parent="hand" instance=ExtResource("4_13orm")]
+Equipped = true
 
 [node name="animations" type="AnimationPlayer" parent="."]
 reset_on_save = false

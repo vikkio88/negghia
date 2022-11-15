@@ -1,4 +1,3 @@
-extends Node
 class_name Enums
 
-enum Weapons { Rifle }
+enum Weapons { Rifle, Pistol }

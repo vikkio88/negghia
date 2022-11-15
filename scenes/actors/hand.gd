@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var gun: Node2D = null
-@onready var rifle_scene = preload("res://scenes/items/weapons/rifle.tscn")
 
 var ads_lerp = 10
 var aim_default = Vector2(10, 44)
@@ -9,7 +8,7 @@ var aim_iron_sight = Vector2(50, -30)
 
 
 func _ready() -> void:
-	gun = $rifle
+	gun = $pistol
 	EventsBus.connect("gun_pickup", self.pickup_gun)
 
 
@@ -57,7 +56,7 @@ func check_ammo() -> int:
 func max_ammo() -> int:
 	if gun == null:
 		return 0
-	return gun.MAX_AMMO
+	return gun.Max_ammo
 
 
 func has_gun() -> bool:
@@ -69,10 +68,10 @@ func get_aimed_point() -> Vector2:
 
 
 func pickup_gun(type: Enums.Weapons) -> void:
-	if type == Enums.Weapons.Rifle:
-		var rifle = rifle_scene.instantiate()
-		add_child(rifle)
-		gun = rifle
+	var weapon = ItemFactory.make_weapon(type).instantiate()
+	weapon.Equipped = true
+	add_child(weapon)
+	gun = weapon
 
 
 func release_gun() -> void:

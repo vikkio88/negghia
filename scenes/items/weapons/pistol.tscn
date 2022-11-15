@@ -1,33 +1,32 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfgt0l21jn7nd"]
+[gd_scene load_steps=17 format=3 uid="uid://imp67aqtytjb"]
 
-[ext_resource type="Script" path="res://scenes/items/weapons/rifle.gd" id="1_44ssp"]
-[ext_resource type="Texture2D" uid="uid://b2vlirb3dn6hi" path="res://assets/m1garand.png" id="1_v1npo"]
-[ext_resource type="AudioStream" uid="uid://cyfx20lj3e670" path="res://assets/sounds/m1empty.mp3" id="3_6trur"]
-[ext_resource type="Texture2D" uid="uid://xp1wwvty5l7p" path="res://assets/clip.png" id="3_uou3a"]
-[ext_resource type="AudioStream" uid="uid://4anrmbi80xtn" path="res://assets/sounds/m1shot.mp3" id="3_us185"]
-[ext_resource type="AudioStream" uid="uid://dqkl7ape0oci1" path="res://assets/sounds/dryfire5.wav" id="6_2dmm2"]
-[ext_resource type="AudioStream" uid="uid://dn1cti125lkmg" path="res://assets/sounds/reload.mp3" id="7_dok4k"]
+[ext_resource type="Script" path="res://scenes/items/weapons/pistol.gd" id="1_w7dfc"]
+[ext_resource type="Texture2D" uid="uid://bofjyeeln7m7w" path="res://assets/pistol.png" id="2_pmlwl"]
+[ext_resource type="Texture2D" uid="uid://xp1wwvty5l7p" path="res://assets/clip.png" id="3_eysno"]
+[ext_resource type="AudioStream" uid="uid://c7c6hystubxr" path="res://assets/sounds/pistolshot.wav" id="4_8i6pq"]
+[ext_resource type="AudioStream" uid="uid://ccxq8darqnr4e" path="res://assets/sounds/pistoldryfire.wav" id="5_vtiow"]
+[ext_resource type="AudioStream" uid="uid://o3fa8nsobn3r" path="res://assets/sounds/pistolreload.wav" id="6_e7od8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xil7p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pirw7"]
 
-[sub_resource type="Gradient" id="Gradient_hd6am"]
+[sub_resource type="Gradient" id="Gradient_0y4pl"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.025974, 0.0909091, 0.727273, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.209454, 0.161094, 0.0406774, 1, 0.837815, 0.644376, 0.16271, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_f2wyr"]
-gradient = SubResource("Gradient_hd6am")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tu10j"]
+gradient = SubResource("Gradient_0y4pl")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k8cj4"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m1vlo"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 25.73
 initial_velocity_max = 134.43
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-color_ramp = SubResource("GradientTexture1D_f2wyr")
+color_ramp = SubResource("GradientTexture1D_tu10j")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b8bop"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8kj6"]
 particle_flag_disable_z = true
 direction = Vector3(-20, -50, 0)
 spread = 0.0
@@ -196,16 +195,16 @@ _data = {
 "shoot": SubResource("Animation_n5adm")
 }
 
-[node name="rifle" type="Node2D"]
+[node name="pistol" type="Node2D"]
 position = Vector2(-5, 0)
 scale = Vector2(3, 3)
-script = ExtResource("1_44ssp")
+script = ExtResource("1_w7dfc")
 
 [node name="sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_v1npo")
+texture = ExtResource("2_pmlwl")
 
 [node name="muzzle" type="Node2D" parent="sprite"]
-position = Vector2(32, -2)
+position = Vector2(12, 1)
 
 [node name="aimline" type="Line2D" parent="sprite/muzzle"]
 position = Vector2(-32, 0)
@@ -220,12 +219,12 @@ target_position = Vector2(200, 0)
 
 [node name="flash" type="GPUParticles2D" parent="sprite/muzzle"]
 modulate = Color(1, 1, 0.792157, 1)
-material = SubResource("ShaderMaterial_xil7p")
+material = SubResource("ShaderMaterial_pirw7")
 emitting = false
 amount = 200
 lifetime = 0.1
 one_shot = true
-process_material = SubResource("ParticleProcessMaterial_k8cj4")
+process_material = SubResource("ParticleProcessMaterial_m1vlo")
 
 [node name="clipeject" type="GPUParticles2D" parent="sprite"]
 position = Vector2(-8, -6)
@@ -233,23 +232,19 @@ emitting = false
 amount = 1
 lifetime = 1.3
 one_shot = true
-process_material = SubResource("ParticleProcessMaterial_b8bop")
-texture = ExtResource("3_uou3a")
+process_material = SubResource("ParticleProcessMaterial_i8kj6")
+texture = ExtResource("3_eysno")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_v2up0")
 }
 
-[node name="empty" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_6trur")
-
 [node name="shoot" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_us185")
-pitch_scale = 2.0
+stream = ExtResource("4_8i6pq")
 
 [node name="dryfire" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_2dmm2")
+stream = ExtResource("5_vtiow")
 
 [node name="reload" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_dok4k")
+stream = ExtResource("6_e7od8")
