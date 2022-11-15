@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://imp67aqtytjb" path="res://scenes/items/weapons/pistol.tscn" id="4_13orm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eymji"]
-size = Vector2(72, 200)
+size = Vector2(42, 120)
 
 [sub_resource type="Animation" id="Animation_mxuuk"]
 length = 0.001
@@ -99,21 +99,20 @@ _data = {
 
 [node name="player" type="CharacterBody2D"]
 position = Vector2(64, 65)
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_i1438")
 
 [node name="body" type="Sprite2D" parent="."]
-scale = Vector2(10, 10)
+scale = Vector2(6, 6)
 texture = ExtResource("2_8dboy")
 hframes = 3
 vframes = 3
 
 [node name="collider" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 20)
+position = Vector2(-2, 11)
 shape = SubResource("RectangleShape2D_eymji")
 
 [node name="hand" type="Node2D" parent="."]
-position = Vector2(10, 44)
+position = Vector2(30, 20)
 script = ExtResource("3_hthc7")
 
 [node name="pistol" parent="hand" instance=ExtResource("4_13orm")]
@@ -126,5 +125,4 @@ libraries = {
 }
 
 [node name="floatph" type="Node2D" parent="."]
-position = Vector2(0, -100)
-scale = Vector2(2, 2)
+position = Vector2(0, -80)

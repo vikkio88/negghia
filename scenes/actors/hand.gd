@@ -3,7 +3,7 @@ extends Node2D
 @onready var gun: Node2D = null
 
 var ads_lerp = 10
-var aim_default = Vector2(10, 44)
+var aim_default = Vector2(20, 30)
 var aim_iron_sight = Vector2(50, -30)
 
 

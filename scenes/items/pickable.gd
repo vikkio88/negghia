@@ -34,7 +34,7 @@ func _physics_process(delta):
 
 func _on_playerdetector_body_entered(body: Node2D) -> void:
 	if not _dropping:
-		EventsBus.emit_signal("interactable_on", "Rifle", "Pickup", self.pick_up)
+		EventsBus.emit_signal("interactable_on", Enums.weapon_to_string(type), "Pickup", self.pick_up)
 
 
 func _on_playerdetector_body_exited(body: Node2D) -> void:

@@ -197,7 +197,6 @@ _data = {
 
 [node name="pistol" type="Node2D"]
 position = Vector2(-5, 0)
-scale = Vector2(3, 3)
 script = ExtResource("1_w7dfc")
 
 [node name="sprite" type="Sprite2D" parent="."]

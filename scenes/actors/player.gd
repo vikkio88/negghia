@@ -62,8 +62,10 @@ func _physics_process(delta: float) -> void:
 func adjust_orientation() -> void:
 	if get_aimed_point().x < global_position.x:
 		Body.set_flip_h(true)
+		Hand.position.x = -30
 	else:
 		Body.set_flip_h(false)
+		Hand.position.x = 30
 
 
 func get_aimed_point() -> Vector2:
