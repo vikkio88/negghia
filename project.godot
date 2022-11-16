@@ -44,10 +44,11 @@ ItemFactory="*res://scripts/ItemFactory.gd"
 
 [display]
 
-window/size/viewport_width=1700
-window/size/viewport_height=956
+window/size/viewport_width=1200
+window/size/viewport_height=675
 mouse_cursor/tooltip_position_offset=Vector2(0, 0)
-window/stretch/scale=0.5
+window/stretch/mode="viewport"
+window/stretch/scale=0.8
 
 [input]
 
