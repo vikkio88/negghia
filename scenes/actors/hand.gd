@@ -60,6 +60,7 @@ func max_ammo() -> int:
 func has_gun() -> bool:
 	return gun != null
 
+
 func is_gun_semi_auto() -> bool:
 	return has_gun() and gun.Is_semi_auto
 

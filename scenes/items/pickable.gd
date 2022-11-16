@@ -7,7 +7,6 @@ class_name BasePickable
 const DROP_LERP: int = 10
 const DROP_RANGE: int = 200
 
-
 var _dropping: bool = false
 var _to_pos: Vector2 = Vector2.ZERO
 
@@ -34,7 +33,10 @@ func _physics_process(delta):
 
 func _on_playerdetector_body_entered(body: Node2D) -> void:
 	if not _dropping:
-		EventsBus.emit_signal("interactable_on", Enums.weapon_to_string(type), "Pickup", self.pick_up)
+		(
+			EventsBus
+			. emit_signal("interactable_on", Enums.weapon_to_string(type), "Pickup", self.pick_up)
+		)
 
 
 func _on_playerdetector_body_exited(body: Node2D) -> void:

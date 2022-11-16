@@ -1,7 +1,6 @@
 extends BaseWeapon
 
 
-
 func _ready() -> void:
 	super()
 	Type = Enums.Weapons.Pistol

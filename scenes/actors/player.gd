@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 		Anims.play("idle_right" if not _is_aiming else "still")
 	else:
 		Anims.play("walk_right", -1, get_walking_speed())
-	
+
 	handle_gun_controls()
 
 	if Input.is_action_just_released("q") and Hand.has_gun():
@@ -55,16 +55,21 @@ func _physics_process(delta: float) -> void:
 func handle_gun_controls() -> void:
 	if not Hand.has_gun():
 		return
-	
-	var shoot_input = Input.is_action_just_released("shoot") if Hand.is_gun_semi_auto() else Input.is_action_pressed("shoot")
+
+	var shoot_input = (
+		Input.is_action_just_released("shoot")
+		if Hand.is_gun_semi_auto()
+		else Input.is_action_pressed("shoot")
+	)
 	if not _is_sprinting and shoot_input and can_aim():
 		Hand.shoot()
 	elif not _is_sprinting and Input.is_action_just_released("reload"):
 		trigger_floating_message("Reloading")
 		Hand.reload()
-	
+
 	if Input.is_action_just_released("g"):
 		Hand.release_gun()
+
 
 func adjust_orientation() -> void:
 	if get_aimed_point().x < global_position.x:
@@ -108,6 +113,7 @@ func get_walking_speed() -> float:
 		return .5
 
 	return 1.0
+
 
 func trigger_floating_message(message: String) -> void:
 	var t = ftext.instantiate()

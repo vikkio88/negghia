@@ -7,6 +7,7 @@ extends Node
 @onready var ar_scene = preload("res://scenes/items/weapons/m4a1.tscn")
 @onready var ar_pickable_scene = preload("res://scenes/items/weapons/m4a1_pickup.tscn")
 
+
 func make_weapon(type: Enums.Weapons) -> Resource:
 	match type:
 		Enums.Weapons.Rifle:
@@ -17,6 +18,7 @@ func make_weapon(type: Enums.Weapons) -> Resource:
 			return ar_scene
 		_:
 			return rifle_scene
+
 
 func make_pickable_weapon(type: Enums.Weapons) -> Resource:
 	match type:

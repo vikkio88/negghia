@@ -28,8 +28,10 @@ var _is_aiming: bool = false
 var _can_fire = true
 var _is_reloading = false
 
+
 func _ready() -> void:
 	Line.clear_points()
+
 
 func set_aim(aiming: bool) -> void:
 	_is_aiming = aiming
@@ -67,7 +69,7 @@ func aim() -> void:
 func shoot() -> Vector2:
 	if _is_reloading:
 		return Vector2.ZERO
-	
+
 	if not _can_fire:
 		return Vector2.ZERO
 
@@ -118,6 +120,7 @@ func reload() -> void:
 	_is_reloading = false
 	set_ammo(Max_ammo)
 	EventsBus.emit_signal("player_event", "Reloded: %s / %s" % [_ammo, Max_ammo])
+
 
 func equipped() -> void:
 	Equipped = true
