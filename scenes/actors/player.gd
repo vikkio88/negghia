@@ -19,6 +19,7 @@ var _is_aiming = false
 
 func _ready() -> void:
 	Anims.play("idle_right")
+	EventsBus.connect("player_event", self.trigger_floating_message)
 	velocity = Vector2.ZERO
 
 
@@ -41,23 +42,29 @@ func _physics_process(delta: float) -> void:
 		Anims.play("idle_right" if not _is_aiming else "still")
 	else:
 		Anims.play("walk_right", -1, get_walking_speed())
-
-	if not _is_sprinting and Input.is_action_just_released("shoot") and can_aim():
-		Hand.shoot()
-	elif not _is_sprinting and Input.is_action_just_released("reload"):
-		var t = ftext.instantiate()
-		floatph.add_child(t)
-		t.trigger("Reloading")
-		Hand.reload()
+	
+	handle_gun_controls()
 
 	if Input.is_action_just_released("q") and Hand.has_gun():
-		var t = ftext.instantiate()
-		floatph.add_child(t)
-		t.trigger("%d / %d" % [Hand.check_ammo(), Hand.max_ammo()])
+		trigger_floating_message("%d / %d" % [Hand.check_ammo(), Hand.max_ammo()])
 
 	move_and_slide()
 	adjust_orientation()
 
+
+func handle_gun_controls() -> void:
+	if not Hand.has_gun():
+		return
+	
+	var shoot_input = Input.is_action_just_released("shoot") if Hand.is_gun_semi_auto() else Input.is_action_pressed("shoot")
+	if not _is_sprinting and shoot_input and can_aim():
+		Hand.shoot()
+	elif not _is_sprinting and Input.is_action_just_released("reload"):
+		trigger_floating_message("Reloading")
+		Hand.reload()
+	
+	if Input.is_action_just_released("g"):
+		Hand.release_gun()
 
 func adjust_orientation() -> void:
 	if get_aimed_point().x < global_position.x:
@@ -101,3 +108,8 @@ func get_walking_speed() -> float:
 		return .5
 
 	return 1.0
+
+func trigger_floating_message(message: String) -> void:
+	var t = ftext.instantiate()
+	floatph.add_child(t)
+	t.trigger(message)

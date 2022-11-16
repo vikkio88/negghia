@@ -17,14 +17,16 @@ const OPERATIONAL_DISTANCE: float = 80.0
 
 @export var Equipped: bool = false
 
+var Is_semi_auto = true
 var Type: Enums.Weapons = Enums.Weapons.Rifle
-var Bullet_speed: float = 1500.0
+var Bullet_speed: float = 2500.0
 var Recoil_Multiplier: float = 40.0
 var Max_ammo: int = 5
 
 var _ammo: int = 5
 var _is_aiming: bool = false
 var _can_fire = true
+var _is_reloading = false
 
 func _ready() -> void:
 	Line.clear_points()
@@ -63,6 +65,9 @@ func aim() -> void:
 
 
 func shoot() -> Vector2:
+	if _is_reloading:
+		return Vector2.ZERO
+	
 	if not _can_fire:
 		return Vector2.ZERO
 
@@ -105,8 +110,15 @@ func has_ammo() -> bool:
 
 
 func reload_start() -> void:
+	_is_reloading = true
 	anim.play("reload")
 
 
 func reload() -> void:
+	_is_reloading = false
 	set_ammo(Max_ammo)
+	EventsBus.emit_signal("player_event", "Reloded: %s / %s" % [_ammo, Max_ammo])
+
+func equipped() -> void:
+	Equipped = true
+	Ray.set_enabled(true)

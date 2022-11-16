@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var gun: Node2D = null
+@onready var Player: Node2D = $".."
 
 var ads_lerp = 10
 var aim_default = Vector2(20, 30)
@@ -17,9 +18,6 @@ func _process(delta: float) -> void:
 		position = position.lerp(aim_default + get_ads_position(), ads_lerp * delta)
 	else:
 		position = position.lerp(aim_default, ads_lerp * delta)
-
-	if Input.is_action_just_released("g"):
-		release_gun()
 
 
 func get_ads_position():
@@ -62,15 +60,20 @@ func max_ammo() -> int:
 func has_gun() -> bool:
 	return gun != null
 
+func is_gun_semi_auto() -> bool:
+	return has_gun() and gun.Is_semi_auto
+
 
 func get_aimed_point() -> Vector2:
 	return get_global_mouse_position()
 
 
 func pickup_gun(type: Enums.Weapons) -> void:
+	if has_gun():
+		release_gun()
 	var weapon = ItemFactory.make_weapon(type).instantiate()
-	weapon.Equipped = true
 	add_child(weapon)
+	weapon.equipped()
 	gun = weapon
 
 

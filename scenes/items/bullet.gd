@@ -1,10 +1,13 @@
 extends RigidBody2D
 
 var _starting_point: Vector2
-
+var _hit_point: Vector2 = Vector2.ZERO
 const MAX_DISTANCE: float = 2000
 const DEVIATION_MULTIPLIER = 0.05
 @onready var hole_scene = preload("res://scenes/items/bullethole.tscn")
+
+@onready var HitRay: RayCast2D = $hit_ray
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,6 +28,9 @@ func _physics_process(delta: float) -> void:
 	if transform.origin.distance_to(_starting_point) > MAX_DISTANCE:
 		print("BULLET OUT OF BOUNDS")
 		queue_free()
+	
+	if HitRay.is_colliding():
+		_hit_point = HitRay.get_collision_point()
 
 
 func _on_area_body_entered(body: Node2D) -> void:
@@ -33,5 +39,8 @@ func _on_area_body_entered(body: Node2D) -> void:
 		body.hit(global_position)
 		var hole = hole_scene.instantiate()
 		body.add_child(hole)
-		hole.global_position = global_position
+		if _hit_point == Vector2.ZERO:
+			hole.global_position = global_position
+		else:
+			hole.global_position = _hit_point
 	queue_free()

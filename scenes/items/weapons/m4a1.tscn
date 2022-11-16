@@ -1,32 +1,32 @@
-[gd_scene load_steps=17 format=3 uid="uid://imp67aqtytjb"]
+[gd_scene load_steps=17 format=3 uid="uid://gwl2xhaiejn"]
 
-[ext_resource type="Script" path="res://scenes/items/weapons/pistol.gd" id="1_w7dfc"]
-[ext_resource type="Texture2D" uid="uid://bofjyeeln7m7w" path="res://assets/pistol.png" id="2_pmlwl"]
-[ext_resource type="Texture2D" uid="uid://xp1wwvty5l7p" path="res://assets/clip.png" id="3_eysno"]
-[ext_resource type="AudioStream" uid="uid://c7c6hystubxr" path="res://assets/sounds/pistolshot.wav" id="4_8i6pq"]
-[ext_resource type="AudioStream" uid="uid://ccxq8darqnr4e" path="res://assets/sounds/pistoldryfire.wav" id="5_vtiow"]
-[ext_resource type="AudioStream" uid="uid://o3fa8nsobn3r" path="res://assets/sounds/pistolreload.wav" id="6_e7od8"]
+[ext_resource type="Script" path="res://scenes/items/weapons/m4a1.gd" id="1_kfprd"]
+[ext_resource type="Texture2D" uid="uid://ceqkok2u5rm3r" path="res://assets/m4a1.png" id="1_s0540"]
+[ext_resource type="Texture2D" uid="uid://xp1wwvty5l7p" path="res://assets/clip.png" id="2_ia175"]
+[ext_resource type="AudioStream" uid="uid://eg8eijx75vfg" path="res://assets/sounds/m4shot.wav" id="4_eb8m0"]
+[ext_resource type="AudioStream" uid="uid://ccxq8darqnr4e" path="res://assets/sounds/pistoldryfire.wav" id="4_qag6x"]
+[ext_resource type="AudioStream" uid="uid://bruhfc3a778rx" path="res://assets/sounds/m4reload.wav" id="6_kl8b8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pirw7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55ste"]
 
-[sub_resource type="Gradient" id="Gradient_0y4pl"]
+[sub_resource type="Gradient" id="Gradient_bd5h4"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.025974, 0.0909091, 0.727273, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.209454, 0.161094, 0.0406774, 1, 0.837815, 0.644376, 0.16271, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_pjmrk"]
-gradient = SubResource("Gradient_0y4pl")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tu10j"]
+gradient = SubResource("Gradient_bd5h4")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m1vlo"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uuhwf"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 25.73
 initial_velocity_max = 134.43
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-color_ramp = SubResource("GradientTexture1D_pjmrk")
+color_ramp = SubResource("GradientTexture1D_tu10j")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8kj6"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e1vnq"]
 particle_flag_disable_z = true
 direction = Vector3(-20, -50, 0)
 spread = 0.0
@@ -93,7 +93,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_0vwnn"]
 resource_name = "reload"
-length = 2.1
+length = 3.95
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -101,7 +101,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(2.1),
+"times": PackedFloat32Array(3.8),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -127,7 +127,7 @@ tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 1.4, 2),
+"times": PackedFloat32Array(0, 0.3, 1.7, 2.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-10, 15), Vector2(15, -15), Vector2(0, 0)]
@@ -135,7 +135,8 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_n5adm"]
 resource_name = "shoot"
-length = 0.3
+length = 0.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -143,7 +144,7 @@ tracks/0/path = NodePath("sprite/muzzle/flash:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -155,7 +156,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -169,7 +170,7 @@ tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
+"times": PackedFloat32Array(0, 0.04, 0.08),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-8, 0), Vector2(0, 0)]
@@ -195,15 +196,15 @@ _data = {
 "shoot": SubResource("Animation_n5adm")
 }
 
-[node name="pistol" type="Node2D"]
+[node name="m4a1" type="Node2D"]
 position = Vector2(-5, 0)
-script = ExtResource("1_w7dfc")
+script = ExtResource("1_kfprd")
 
 [node name="sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_pmlwl")
+texture = ExtResource("1_s0540")
 
 [node name="muzzle" type="Node2D" parent="sprite"]
-position = Vector2(12, 1)
+position = Vector2(34, -4)
 
 [node name="aimline" type="Line2D" parent="sprite/muzzle"]
 position = Vector2(-32, 0)
@@ -219,12 +220,12 @@ target_position = Vector2(6000, 0)
 
 [node name="flash" type="GPUParticles2D" parent="sprite/muzzle"]
 modulate = Color(1, 1, 0.792157, 1)
-material = SubResource("ShaderMaterial_pirw7")
+material = SubResource("ShaderMaterial_55ste")
 emitting = false
 amount = 200
 lifetime = 0.1
 one_shot = true
-process_material = SubResource("ParticleProcessMaterial_m1vlo")
+process_material = SubResource("ParticleProcessMaterial_uuhwf")
 
 [node name="clipeject" type="GPUParticles2D" parent="sprite"]
 position = Vector2(-8, -6)
@@ -232,8 +233,8 @@ emitting = false
 amount = 1
 lifetime = 1.3
 one_shot = true
-process_material = SubResource("ParticleProcessMaterial_i8kj6")
-texture = ExtResource("3_eysno")
+process_material = SubResource("ParticleProcessMaterial_e1vnq")
+texture = ExtResource("2_ia175")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -241,10 +242,10 @@ libraries = {
 }
 
 [node name="shoot" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_8i6pq")
+stream = ExtResource("4_eb8m0")
 
 [node name="dryfire" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_vtiow")
+stream = ExtResource("4_qag6x")
 
 [node name="reload" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_e7od8")
+stream = ExtResource("6_kl8b8")

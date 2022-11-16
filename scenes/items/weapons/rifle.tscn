@@ -216,7 +216,8 @@ default_color = Color(1, 0, 0, 0.282353)
 [node name="aimcast" type="RayCast2D" parent="sprite/muzzle/aimline"]
 position = Vector2(31, 0)
 rotation = -1.5708
-target_position = Vector2(200, 0)
+enabled = false
+target_position = Vector2(6000, 0)
 
 [node name="flash" type="GPUParticles2D" parent="sprite/muzzle"]
 modulate = Color(1, 1, 0.792157, 1)

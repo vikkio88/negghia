@@ -6,16 +6,6 @@ extends Node2D
 
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(arrow, Input.CURSOR_ARROW, Vector2(15, 15))
-	(
-		EventsBus
-		. connect(
-			"interactable_on",
-			func(item: String, action: String, callback: Callable): print("%s, %s" % [item, action])
-		)
-	)
-
-	EventsBus.connect("interactable_off", func(): print("NO MORE"))
-
 	EventsBus.connect("gun_dropped", self.spawn_gun)
 
 
