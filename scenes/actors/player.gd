@@ -18,7 +18,6 @@ var _is_aiming = false
 
 
 func _ready() -> void:
-	Anims.play("idle")
 	EventsBus.connect("player_event", self.trigger_floating_message)
 	velocity = Vector2.ZERO
 
@@ -40,7 +39,8 @@ func _physics_process(delta: float) -> void:
 
 	if velocity == Vector2.ZERO:
 		# TODO: GET A STILL ANIMATION GOING
-		Anims.play("idle" if not _is_aiming else "idle")
+		#Anims.play("idle" if not _is_aiming else "idle")
+		Anims.play("still")
 	else:
 		Anims.play("walk", -1, get_walking_speed())
 

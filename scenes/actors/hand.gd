@@ -4,8 +4,8 @@ extends Node2D
 @onready var Player: Node2D = $".."
 
 var ads_lerp = 10
-var aim_default = Vector2(15, -14)
-var aim_iron_sight = Vector2(27, -27)
+var aim_default = Vector2(15, -50)
+var aim_iron_sight = Vector2(20, -15)
 
 
 func _ready() -> void:
@@ -37,8 +37,15 @@ func set_aim(aim: bool) -> void:
 func shoot() -> void:
 	if has_gun():
 		var recoil = gun.shoot()
-		get_viewport().warp_mouse(get_viewport().get_mouse_position() + recoil)
+		_apply_recoil(recoil)
 
+
+func _apply_recoil(recoil: Vector2) -> void:
+	if recoil != Vector2.ZERO:
+		var mouse_pos = get_viewport().get_mouse_position()
+		get_viewport().warp_mouse(mouse_pos + recoil)
+		# this is to move a bit the player with recoil
+		#Player.position.x += (-1 if mouse_pos.x > Player.position.x else 1) * 1  
 
 func reload() -> void:
 	if has_gun():
@@ -69,17 +76,17 @@ func get_aimed_point() -> Vector2:
 	return get_global_mouse_position()
 
 
-func pickup_gun(type: Enums.Weapons) -> void:
+func pickup_gun(type: Enums.Weapons, initial_ammo: int) -> void:
 	if has_gun():
 		release_gun()
 	var weapon = ItemFactory.make_weapon(type).instantiate()
 	add_child(weapon)
-	weapon.equipped()
+	weapon.equipped(initial_ammo)
 	gun = weapon
 
 
 func release_gun() -> void:
 	if has_gun():
-		EventsBus.emit_signal("gun_dropped", gun.Type, global_position)
+		EventsBus.emit_signal("gun_dropped", gun.Type, global_position, gun._ammo)
 		remove_child(gun)
 		gun = null

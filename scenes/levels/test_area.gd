@@ -9,7 +9,7 @@ func _ready() -> void:
 	EventsBus.connect("gun_dropped", self.spawn_gun)
 
 
-func spawn_gun(type: Enums.Weapons, position: Vector2):
+func spawn_gun(type: Enums.Weapons, position: Vector2, ammo_left: int = 0):
 	var weapon = ItemFactory.make_pickable_weapon(type).instantiate()
-	weapon.init(position, true)
+	weapon.init(position, true, ammo_left)
 	add_child(weapon)

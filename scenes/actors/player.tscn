@@ -1,62 +1,68 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsqv7hl8eu5hm"]
+[gd_scene load_steps=10 format=3 uid="uid://bsqv7hl8eu5hm"]
 
 [ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_i1438"]
-[ext_resource type="Texture2D" uid="uid://dtiikwgeev73y" path="res://assets/Alex_16x16.png" id="2_y100q"]
+[ext_resource type="Texture2D" uid="uid://bxi20qwfxhcks" path="res://assets/characterslim.png" id="2_57h8m"]
 [ext_resource type="Script" path="res://scenes/actors/hand.gd" id="3_hthc7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eymji"]
-size = Vector2(42, 58)
-
-[sub_resource type="Animation" id="Animation_iyrga"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 24, 25, 26, 27, 28, 29]
-}
+size = Vector2(45, 108)
 
 [sub_resource type="Animation" id="Animation_6uay4"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("body:frame")
+tracks/0/path = NodePath("body:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [24]
+"update": 0,
+"values": [0.139626]
+}
+
+[sub_resource type="Animation" id="Animation_iyrga"]
+resource_name = "idle"
+length = 0.5
+
+[sub_resource type="Animation" id="Animation_v083c"]
+resource_name = "still"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_fv6xm"]
 resource_name = "walk"
-length = 0.65
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("body:frame")
+tracks/0/path = NodePath("body:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 48, 49, 50, 51, 52, 53]
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.139626, 0.139626, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3oi42"]
 _data = {
 "RESET": SubResource("Animation_6uay4"),
 "idle": SubResource("Animation_iyrga"),
+"still": SubResource("Animation_v083c"),
 "walk": SubResource("Animation_fv6xm")
 }
 
@@ -64,19 +70,16 @@ _data = {
 script = ExtResource("1_i1438")
 
 [node name="body" type="Sprite2D" parent="."]
-position = Vector2(0, -45)
-scale = Vector2(3, 3)
-texture = ExtResource("2_y100q")
-hframes = 24
-vframes = 7
-frame = 53
+position = Vector2(0, -52)
+scale = Vector2(4, 4)
+texture = ExtResource("2_57h8m")
 
 [node name="collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -30)
+position = Vector2(-0.5, -54)
 shape = SubResource("RectangleShape2D_eymji")
 
 [node name="hand" type="Node2D" parent="."]
-position = Vector2(27, -27)
+position = Vector2(15, -50)
 script = ExtResource("3_hthc7")
 
 [node name="animations" type="AnimationPlayer" parent="."]

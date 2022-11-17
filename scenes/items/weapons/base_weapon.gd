@@ -20,6 +20,7 @@ const OPERATIONAL_DISTANCE: float = 80.0
 var Is_semi_auto = true
 var Type: Enums.Weapons = Enums.Weapons.Rifle
 var Bullet_speed: float = 2500.0
+var Base_damage: float = 80.0
 var Recoil_Multiplier: float = 40.0
 var Max_ammo: int = 5
 
@@ -83,7 +84,7 @@ func shoot() -> Vector2:
 	var b: Node2D = bullet.instantiate()
 	b.global_position = Muzzle.global_position
 	get_tree().get_root().add_child(b)
-	b.shoot(Bullet_speed, _is_aiming)
+	b.shoot(Bullet_speed, Base_damage, _is_aiming)
 	anim.play("shoot")
 	return Vector2(
 		randi_range(-Recoil_Multiplier, Recoil_Multiplier),
@@ -122,6 +123,7 @@ func reload() -> void:
 	EventsBus.emit_signal("player_event", "Reloded: %s / %s" % [_ammo, Max_ammo])
 
 
-func equipped() -> void:
+func equipped(intial_ammo: int = 0) -> void:
 	Equipped = true
+	_ammo = intial_ammo
 	Ray.set_enabled(true)

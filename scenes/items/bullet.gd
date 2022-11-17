@@ -2,6 +2,8 @@ extends RigidBody2D
 
 var _starting_point: Vector2
 var _hit_point: Vector2 = Vector2.ZERO
+var _base_dmg: float = 0.0
+
 const MAX_DISTANCE: float = 2000
 const DEVIATION_MULTIPLIER = 0.05
 @onready var hole_scene = preload("res://scenes/items/bullethole.tscn")
@@ -14,8 +16,9 @@ func _ready() -> void:
 	_starting_point = transform.origin
 
 
-func shoot(speed: float, precision: bool) -> void:
+func shoot(speed: float, base_dmg : float, precision: bool) -> void:
 	look_at(get_global_mouse_position())
+	_base_dmg = base_dmg
 	var deviation = 0
 	if not precision:
 		var deviation_angle = PI * DEVIATION_MULTIPLIER
@@ -35,7 +38,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_body_entered(body: Node2D) -> void:
 	set_freeze_enabled(true)
 	if body.has_method("hit"):
-		body.hit(global_position)
+		body.hit(global_position, _base_dmg)
 		var hole = hole_scene.instantiate()
 		body.add_child(hole)
 		if _hit_point == Vector2.ZERO:

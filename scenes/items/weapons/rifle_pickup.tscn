@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7ewv04ry1b71"]
+[gd_scene load_steps=3 format=3 uid="uid://be2mxr4seeur4"]
 
-[ext_resource type="PackedScene" uid="uid://cq85607dg8oav" path="res://scenes/items/pickable.tscn" id="1_0n3pv"]
+[ext_resource type="PackedScene" uid="uid://d26r0wmtyudsk" path="res://scenes/items/weapon_pickable.tscn" id="1_5ih3c"]
 [ext_resource type="PackedScene" uid="uid://dfgt0l21jn7nd" path="res://scenes/items/weapons/rifle.tscn" id="2_j286p"]
 
-[node name="rifle_pickup" instance=ExtResource("1_0n3pv")]
+[node name="rifle_pickup" instance=ExtResource("1_5ih3c")]
 type = 0
+ammo_left = 5
 
 [node name="rifle" parent="." index="1" instance=ExtResource("2_j286p")]
 scale = Vector2(1, 1)

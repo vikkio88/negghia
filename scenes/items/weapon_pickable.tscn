@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq85607dg8oav"]
+[gd_scene load_steps=3 format=3 uid="uid://d26r0wmtyudsk"]
 
-[ext_resource type="Script" path="res://scenes/items/pickable.gd" id="1_lad15"]
+[ext_resource type="Script" path="res://scenes/items/weapon_pickable.gd" id="1_ypmcy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_47v4x"]
 radius = 36.0312
 
-[node name="pickable" type="Node2D"]
+[node name="weapon_pickable" type="Node2D"]
 z_index = -1
-script = ExtResource("1_lad15")
+script = ExtResource("1_ypmcy")
 
 [node name="playerdetector" type="Area2D" parent="."]
 collision_layer = 0

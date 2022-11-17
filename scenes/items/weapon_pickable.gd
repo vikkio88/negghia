@@ -1,8 +1,9 @@
 extends Node2D
-class_name BasePickable
+class_name BaseWeaponPickable
 
 @onready var Sprite = $sprite
 @export var type: Enums.Weapons
+@export var ammo_left: int = 0
 
 const DROP_LERP: int = 10
 const DROP_RANGE: int = 200
@@ -11,8 +12,9 @@ var _dropping: bool = false
 var _to_pos: Vector2 = Vector2.ZERO
 
 
-func init(position: Vector2, dropped: bool = false) -> void:
+func init(position: Vector2, dropped: bool = false, ammo_left:int = 0) -> void:
 	_dropping = dropped
+	ammo_left = ammo_left
 	global_position = position
 	if dropped:
 		_to_pos = (
@@ -47,5 +49,5 @@ func _on_playerdetector_body_exited(body: Node2D) -> void:
 func pick_up() -> void:
 	if _dropping:
 		return
-	EventsBus.emit_signal("gun_pickup", type)
+	EventsBus.emit_signal("gun_pickup", type, ammo_left)
 	queue_free()
