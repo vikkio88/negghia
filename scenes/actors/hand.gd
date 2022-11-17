@@ -4,8 +4,8 @@ extends Node2D
 @onready var Player: Node2D = $".."
 
 var ads_lerp = 10
-var aim_default = Vector2(20, 30)
-var aim_iron_sight = Vector2(50, -30)
+var aim_default = Vector2(15, -14)
+var aim_iron_sight = Vector2(27, -27)
 
 
 func _ready() -> void:

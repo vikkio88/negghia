@@ -18,7 +18,7 @@ var _is_aiming = false
 
 
 func _ready() -> void:
-	Anims.play("idle_right")
+	Anims.play("idle")
 	EventsBus.connect("player_event", self.trigger_floating_message)
 	velocity = Vector2.ZERO
 
@@ -39,9 +39,10 @@ func _physics_process(delta: float) -> void:
 		velocity = direction.normalized() * get_speed()
 
 	if velocity == Vector2.ZERO:
-		Anims.play("idle_right" if not _is_aiming else "still")
+		# TODO: GET A STILL ANIMATION GOING
+		Anims.play("idle" if not _is_aiming else "idle")
 	else:
-		Anims.play("walk_right", -1, get_walking_speed())
+		Anims.play("walk", -1, get_walking_speed())
 
 	handle_gun_controls()
 

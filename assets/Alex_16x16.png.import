@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0cmpc34lktjp"
-path="res://.godot/imported/testnegghia.png-e2101e2d424a054f3fab15813bab3828.ctex"
+uid="uid://dtiikwgeev73y"
+path="res://.godot/imported/Alex_16x16.png-574db1552b78dead625af56cb3e431c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/testnegghia.png"
-dest_files=["res://.godot/imported/testnegghia.png-e2101e2d424a054f3fab15813bab3828.ctex"]
+source_file="res://assets/Alex_16x16.png"
+dest_files=["res://.godot/imported/Alex_16x16.png-574db1552b78dead625af56cb3e431c0.ctex"]
 
 [params]
 
