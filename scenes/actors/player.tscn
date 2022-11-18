@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsqv7hl8eu5hm"]
+[gd_scene load_steps=11 format=3 uid="uid://bsqv7hl8eu5hm"]
 
 [ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_i1438"]
 [ext_resource type="Texture2D" uid="uid://bxi20qwfxhcks" path="res://assets/characterslim.png" id="2_57h8m"]
 [ext_resource type="Script" path="res://scenes/actors/hand.gd" id="3_hthc7"]
+[ext_resource type="Script" path="res://scenes/actors/view.gd" id="4_aqb64"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eymji"]
 size = Vector2(45, 108)
@@ -90,3 +91,14 @@ libraries = {
 
 [node name="floatph" type="Node2D" parent="."]
 position = Vector2(0, -80)
+
+[node name="view" type="Area2D" parent="."]
+position = Vector2(8, -90)
+script = ExtResource("4_aqb64")
+
+[node name="cone" type="CollisionPolygon2D" parent="view"]
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(0, 0, 205, 175, 205, -175)
+
+[connection signal="body_entered" from="view" to="view" method="_on_body_in_viewcone"]
+[connection signal="body_exited" from="view" to="view" method="_on_body_exited_viewcone"]

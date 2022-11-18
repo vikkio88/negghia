@@ -11,7 +11,9 @@ height = 96.0
 radius = 14.0
 height = 28.0
 
-[node name="dummy" type="RigidBody2D"]
+[node name="dummy" type="RigidBody2D" groups=["view_conable"]]
+visible = false
+z_as_relative = false
 script = ExtResource("1_xvyg5")
 
 [node name="sprite" type="Sprite2D" parent="."]

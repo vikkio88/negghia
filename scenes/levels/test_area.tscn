@@ -2798,9 +2798,19 @@ current = true
 [node name="Hud" parent="player/main_camera" instance=ExtResource("4_25clx")]
 
 [node name="dummy" parent="." instance=ExtResource("2_f870b")]
+visible = true
 position = Vector2(1231, 239)
 
+[node name="dummy3" parent="." instance=ExtResource("2_f870b")]
+visible = true
+position = Vector2(1133, 303)
+
+[node name="dummy4" parent="." instance=ExtResource("2_f870b")]
+visible = true
+position = Vector2(1132, 237)
+
 [node name="dummy2" parent="." instance=ExtResource("2_f870b")]
+visible = true
 position = Vector2(1244, 484)
 
 [node name="rifle_pickup" parent="." instance=ExtResource("5_msw1w")]

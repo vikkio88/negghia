@@ -120,3 +120,4 @@ func trigger_floating_message(message: String) -> void:
 	var t = ftext.instantiate()
 	floatph.add_child(t)
 	t.trigger(message)
+
