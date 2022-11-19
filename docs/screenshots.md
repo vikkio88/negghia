@@ -29,3 +29,10 @@ Adding first tilemap
 ### Recoil
 ![recoil](https://user-images.githubusercontent.com/248805/202240522-417073e1-f89e-445d-adb5-a210ea00b2d8.gif)
 
+## 19th November
+Implemented ammo persistency on dropped weapons
+Implemented first draft of a view cone for enemies nearby
+
+![ezgif-1-661bec2a19](https://user-images.githubusercontent.com/248805/202844680-0387c670-f2d1-471a-bda8-f5ada336045f.gif)
+
+
