@@ -16,7 +16,7 @@ func _ready() -> void:
 	_starting_point = transform.origin
 
 
-func shoot(speed: float, base_dmg : float, precision: bool) -> void:
+func shoot(speed: float, base_dmg: float, precision: bool) -> void:
 	look_at(get_global_mouse_position())
 	_base_dmg = base_dmg
 	var deviation = 0

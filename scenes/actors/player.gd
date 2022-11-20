@@ -121,6 +121,6 @@ func trigger_floating_message(message: String) -> void:
 	floatph.add_child(t)
 	t.trigger(message)
 
+
 func _footstep_adjust() -> void:
 	$footstep.set_pitch_scale(randf_range(0.8, 1.8))
-

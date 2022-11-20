@@ -12,7 +12,7 @@ var _dropping: bool = false
 var _to_pos: Vector2 = Vector2.ZERO
 
 
-func init(position: Vector2, dropped: bool = false, ammo_left:int = 0) -> void:
+func init(position: Vector2, dropped: bool = false, ammo_left: int = 0) -> void:
 	_dropping = dropped
 	ammo_left = ammo_left
 	global_position = position

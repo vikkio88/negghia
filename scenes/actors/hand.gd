@@ -45,7 +45,8 @@ func _apply_recoil(recoil: Vector2) -> void:
 		var mouse_pos = get_viewport().get_mouse_position()
 		get_viewport().warp_mouse(mouse_pos + recoil)
 		# this is to move a bit the player with recoil
-		#Player.position.x += (-1 if mouse_pos.x > Player.position.x else 1) * 1  
+		#Player.position.x += (-1 if mouse_pos.x > Player.position.x else 1) * 1
+
 
 func reload() -> void:
 	if has_gun():
