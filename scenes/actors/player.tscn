@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsqv7hl8eu5hm"]
+[gd_scene load_steps=13 format=3 uid="uid://bsqv7hl8eu5hm"]
 
 [ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_i1438"]
 [ext_resource type="Texture2D" uid="uid://bxi20qwfxhcks" path="res://assets/characterslim.png" id="2_57h8m"]
 [ext_resource type="Script" path="res://scenes/actors/hand.gd" id="3_hthc7"]
 [ext_resource type="Script" path="res://scenes/actors/view.gd" id="4_aqb64"]
+[ext_resource type="AudioStream" uid="uid://qclbcmu1l8vn" path="res://assets/sounds/effects/footstep_concrete.wav" id="5_5t4qr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eymji"]
 size = Vector2(45, 108)
@@ -21,6 +22,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.139626]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("footstep:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_iyrga"]
@@ -57,6 +70,32 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, -0.139626, 0.139626, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("footstep:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_footstep_adjust"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3oi42"]
@@ -107,6 +146,9 @@ polygon = PackedVector2Array(0, 0, 205, 175, 205, -175)
 
 [node name="close_field" type="CollisionShape2D" parent="close_view"]
 shape = SubResource("CircleShape2D_7nkk4")
+
+[node name="footstep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5t4qr")
 
 [connection signal="body_entered" from="view" to="view" method="_on_body_in_viewcone"]
 [connection signal="body_exited" from="view" to="view" method="_on_body_exited_viewcone"]
