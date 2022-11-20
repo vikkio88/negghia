@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends CharacterBody2D
 
 @onready var ftext = preload("res://scenes/hud/floating_text.tscn")
 

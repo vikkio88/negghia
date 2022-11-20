@@ -2803,7 +2803,7 @@ position = Vector2(1231, 239)
 
 [node name="dummy3" parent="." instance=ExtResource("2_f870b")]
 visible = true
-position = Vector2(1133, 303)
+position = Vector2(1130, 401)
 
 [node name="dummy4" parent="." instance=ExtResource("2_f870b")]
 visible = true
