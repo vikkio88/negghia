@@ -5,7 +5,6 @@ class_name BaseWeapon
 const OPERATIONAL_DISTANCE: float = 80.0
 
 @onready var Line: Line2D = $sprite/muzzle/aimline
-@onready var Ray: RayCast2D = $sprite/muzzle/aimline/aimcast
 @onready var Muzzle: Node2D = $sprite/muzzle
 @onready var Sprite: Sprite2D = $sprite
 @onready var anim: AnimationPlayer = $anim
@@ -42,14 +41,12 @@ func _physics_process(delta: float) -> void:
 	if not Equipped:
 		return
 	Line.clear_points()
-	Ray.global_position = global_position
 	Line.global_position = global_position
 	var aimed_point = get_global_mouse_position()
 	gun_orientation(aimed_point)
 
 
 func gun_orientation(aimed_point: Vector2) -> void:
-	Ray.look_at(aimed_point)
 	look_at(aimed_point)
 	if aimed_point.x < global_position.x:
 		Sprite.set_flip_v(true)
@@ -126,4 +123,3 @@ func reload() -> void:
 func equipped(intial_ammo: int = 0) -> void:
 	Equipped = true
 	_ammo = intial_ammo
-	Ray.set_enabled(true)

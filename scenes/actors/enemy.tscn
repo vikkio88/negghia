@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://bc0y48jbb6xch"]
+
+[ext_resource type="Script" path="res://scenes/actors/enemy.gd" id="1_a50m1"]
+[ext_resource type="Texture2D" uid="uid://dih1ngohlvype" path="res://assets/enemyslim.png" id="2_x383p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnblb"]
+size = Vector2(36, 76)
+
+[sub_resource type="Animation" id="Animation_belmf"]
+resource_name = "walk"
+
+[sub_resource type="Animation" id="Animation_yeynj"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_5dpnj"]
+resource_name = "die"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.349066, -1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -52), Vector2(-12, -52), Vector2(-46, -12)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"dead"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ijvkm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, -52)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3gm0"]
+_data = {
+"RESET": SubResource("Animation_ijvkm"),
+"die": SubResource("Animation_5dpnj"),
+"idle": SubResource("Animation_yeynj"),
+"walk": SubResource("Animation_belmf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u68m2"]
+size = Vector2(31, 33)
+
+[node name="enemy" type="CharacterBody2D"]
+script = ExtResource("1_a50m1")
+
+[node name="body" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -38)
+shape = SubResource("RectangleShape2D_nnblb")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r3gm0")
+}
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -52)
+scale = Vector2(4, 4)
+texture = ExtResource("2_x383p")
+
+[node name="head" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -93)
+shape = SubResource("RectangleShape2D_u68m2")
+
+[node name="placeholder" type="Node2D" parent="."]
+position = Vector2(-1.01694, -135.417)

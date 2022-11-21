@@ -199,12 +199,6 @@ points = PackedVector2Array(31, -2, 56.3243, -2, 230, -2)
 width = 1.0
 default_color = Color(1, 0, 0, 0.282353)
 
-[node name="aimcast" type="RayCast2D" parent="sprite/muzzle/aimline"]
-position = Vector2(31, 0)
-rotation = -1.5708
-enabled = false
-target_position = Vector2(6000, 0)
-
 [node name="flash" type="GPUParticles2D" parent="sprite/muzzle"]
 modulate = Color(1, 1, 0.792157, 1)
 material = SubResource("ShaderMaterial_pirw7")

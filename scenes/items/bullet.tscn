@@ -31,6 +31,8 @@ texture = ExtResource("1_h46oj")
 
 [node name="hit_ray" type="RayCast2D" parent="."]
 rotation = -1.5708
-target_position = Vector2(0, 100)
+target_position = Vector2(0, 300)
+collision_mask = 15
+hit_from_inside = true
 
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]

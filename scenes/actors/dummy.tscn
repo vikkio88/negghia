@@ -11,11 +11,11 @@ height = 96.0
 radius = 14.0
 height = 28.0
 
-[node name="dummy" type="CharacterBody2D" groups=["view_conable"]]
-visible = false
+[node name="dummy" type="RigidBody2D" groups=["view_conable"]]
 z_as_relative = false
 collision_layer = 2
 collision_mask = 13
+mass = 600.0
 script = ExtResource("1_xvyg5")
 
 [node name="sprite" type="Sprite2D" parent="."]

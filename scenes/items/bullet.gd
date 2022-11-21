@@ -28,9 +28,8 @@ func shoot(speed: float, base_dmg: float, precision: bool) -> void:
 
 func _physics_process(delta: float) -> void:
 	if transform.origin.distance_to(_starting_point) > MAX_DISTANCE:
-		print("BULLET OUT OF BOUNDS")
 		queue_free()
-
+		
 	if HitRay.is_colliding():
 		_hit_point = HitRay.get_collision_point()
 

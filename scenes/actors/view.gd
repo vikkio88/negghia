@@ -8,14 +8,15 @@ func get_aimed_point() -> Vector2:
 
 
 func _process(delta: float) -> void:
+	return
 	look_at(get_aimed_point())
-	#Ray.look_at(get_aimed_point())
 
 
 func _on_body_in_viewcone(body: Node2D) -> void:
 	if body.is_in_group("view_conable"):
 		if body.global_position.distance_to(global_position) <= VIEW_DISTANCE + 100:
-			body.visible = true
+			print("within")
+			body.show()
 			return
 
 		var space_state = get_world_2d().direct_space_state
@@ -26,8 +27,9 @@ func _on_body_in_viewcone(body: Node2D) -> void:
 			)
 		)
 		if result != {} and result.collider == body:
+			print("not within, but collides")
 			print(result.collider)
-			body.visible = true
+			body.show()
 
 
 func _on_body_exited_viewcone(body: Node2D) -> void:
@@ -35,4 +37,5 @@ func _on_body_exited_viewcone(body: Node2D) -> void:
 		body.is_in_group("view_conable")
 		and body.global_position.distance_to(global_position) > VIEW_DISTANCE
 	):
-		body.visible = false
+		print("exited")
+		body.hide()
