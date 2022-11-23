@@ -4,6 +4,8 @@ enum Weapons { Rifle, Pistol, AR }
 
 enum AIState { Idle, Patrol, Investigate, Chase, Attack }
 
+enum NoiseLevel { Normal, Quiet, Loud }
+
 
 static func weapon_to_string(type: Weapons) -> String:
 	match type:
