@@ -35,4 +35,13 @@ Implemented first draft of a view cone for enemies nearby
 
 ![ezgif-1-661bec2a19](https://user-images.githubusercontent.com/248805/202844680-0387c670-f2d1-471a-bda8-f5ada336045f.gif)
 
+## 23rd November
+Added Zombie Chaser, who follow sound and vision
+![chaser](https://user-images.githubusercontent.com/248805/203634258-b57975da-6bcc-4712-b95a-2030906044cd.gif)
+
+Adding Pathfinder using Navigation2d and StateMachine for Enemy Ai
+![aichase](https://user-images.githubusercontent.com/248805/203634610-5e4d1e25-36d0-4adb-92e5-625587822cbe.gif)
+
+
+
 
