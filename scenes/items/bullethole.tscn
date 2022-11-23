@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cigjv4mabilrc"]
 
 [ext_resource type="Script" path="res://scenes/items/bullethole.gd" id="1_e5wsw"]
-[ext_resource type="Texture2D" uid="uid://c4e2x2dgblx5j" path="res://assets/bullethole.png" id="2_8fhde"]
+[ext_resource type="Texture2D" uid="uid://xk7eeormaaoy" path="res://assets/bulletholewhite.png" id="2_l7fa5"]
 
 [sub_resource type="Animation" id="Animation_teghm"]
 length = 0.001
@@ -53,7 +53,7 @@ tracks/1/path = NodePath("sprite:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.1, 2.4),
+"times": PackedFloat32Array(2.05, 2.4),
 "transitions": PackedFloat32Array(0.210224, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -83,7 +83,8 @@ _data = {
 script = ExtResource("1_e5wsw")
 
 [node name="sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_8fhde")
+self_modulate = Color(0, 0, 0, 1)
+texture = ExtResource("2_l7fa5")
 hframes = 8
 frame = 1
 
