@@ -10,7 +10,7 @@ extends RigidBody2D
 const HEADSHOT_THRESHOLD: float = 23.0
 const BODYSHOT_THRESHOLD: float = 60.0
 
-
+# ENEMY HITTING LOGIC
 func hit(point: Vector2, base_dmg: float) -> void:
 	var head_d = head.global_position.distance_to(point)
 	var body_d = body.global_position.distance_to(point)
@@ -23,6 +23,9 @@ func hit(point: Vector2, base_dmg: float) -> void:
 	dmg_placeholder.add_child(t)
 	t.trigger("%s - %d" % [type, damage])
 
+func add_hole(hole: Node2D):
+	sprite.add_child(hole)
+# END OF ENEMY HITTING LOGIC
 
 func show():
 	sprite.modulate.a = 1

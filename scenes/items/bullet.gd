@@ -39,7 +39,7 @@ func _on_area_body_entered(body: Node2D) -> void:
 	if body.has_method("hit"):
 		body.hit(global_position, _base_dmg)
 		var hole = hole_scene.instantiate()
-		body.add_child(hole)
+		body.add_hole(hole)
 		if _hit_point == Vector2.ZERO:
 			hole.global_position = global_position
 		else:
