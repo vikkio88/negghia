@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsqv7hl8eu5hm"]
+[gd_scene load_steps=21 format=3 uid="uid://bsqv7hl8eu5hm"]
 
 [ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_i1438"]
 [ext_resource type="Texture2D" uid="uid://bxi20qwfxhcks" path="res://assets/characterslim.png" id="2_57h8m"]
@@ -51,6 +51,34 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_iyrga"]
 resource_name = "idle"
 length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("noise/collider:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_pgcva"]
+resource_name = "noise"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("noise/collider:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 600.0]
+}
 
 [sub_resource type="Animation" id="Animation_v083c"]
 resource_name = "still"
@@ -66,6 +94,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("noise/collider:shape:radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_fv6xm"]
@@ -126,6 +166,7 @@ tracks/3/keys = {
 _data = {
 "RESET": SubResource("Animation_6uay4"),
 "idle": SubResource("Animation_iyrga"),
+"noise": SubResource("Animation_pgcva"),
 "still": SubResource("Animation_v083c"),
 "walk": SubResource("Animation_fv6xm")
 }
@@ -138,6 +179,77 @@ radius = 80.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_guvvs"]
 radius = 1.0
+
+[sub_resource type="Animation" id="Animation_pti2i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("collider:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_brlnt"]
+resource_name = "emit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("collider:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 400.0]
+}
+
+[sub_resource type="Animation" id="Animation_cdu1y"]
+resource_name = "emit_loud"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("collider:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 800.0]
+}
+
+[sub_resource type="Animation" id="Animation_0mtb1"]
+resource_name = "emit_quiet"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("collider:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.01, 50.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8e5du"]
+_data = {
+"RESET": SubResource("Animation_pti2i"),
+"emit": SubResource("Animation_brlnt"),
+"emit_loud": SubResource("Animation_cdu1y"),
+"emit_quiet": SubResource("Animation_0mtb1")
+}
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 7
@@ -198,6 +310,12 @@ shape = SubResource("CircleShape2D_gyk4d")
 [node name="collider" type="CollisionShape2D" parent="noise"]
 position = Vector2(1, -56)
 shape = SubResource("CircleShape2D_guvvs")
+debug_color = Color(0.870588, 0.317647, 0.392157, 0.733333)
+
+[node name="anim" type="AnimationPlayer" parent="noise"]
+libraries = {
+"": SubResource("AnimationLibrary_8e5du")
+}
 
 [connection signal="body_entered" from="view" to="view" method="_on_body_in_viewcone"]
 [connection signal="body_exited" from="view" to="view" method="_on_body_exited_viewcone"]

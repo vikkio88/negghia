@@ -7,6 +7,7 @@ const MIN_AIM_DISTANCE: float = 100.0
 @onready var Body: Sprite2D = $body
 @onready var Hand: Node2D = $hand
 @onready var Anims: AnimationPlayer = $animations
+@onready var noise: AnimationPlayer = $noise/anim
 @onready var floatph: Node2D = $floatph
 
 @export var _speed: float = 100.0
@@ -124,3 +125,12 @@ func trigger_floating_message(message: String) -> void:
 
 func _footstep_adjust() -> void:
 	$footstep.set_pitch_scale(randf_range(0.8, 1.8))
+
+func emit_noise(level: Enums.NoiseLevel = Enums.NoiseLevel.Normal) -> void:
+	match level:
+		Enums.NoiseLevel.Normal:
+			noise.play("emit")
+		Enums.NoiseLevel.Quiet:
+			noise.play("emit_quiet")
+		Enums.NoiseLevel.Loud:
+			noise.play("emit_loud")
