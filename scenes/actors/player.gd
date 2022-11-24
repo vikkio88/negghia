@@ -2,13 +2,11 @@ extends CharacterBody2D
 
 const MIN_AIM_DISTANCE: float = 100.0
 
-@onready var ftext = preload("res://scenes/hud/floating_text.tscn")
-
 @onready var Body: Sprite2D = $body
 @onready var Hand: Node2D = $hand
 @onready var Anims: AnimationPlayer = $animations
 @onready var noise: AnimationPlayer = $noise/anim
-@onready var floatph: Node2D = $floatph
+@onready var ft_placeholder: Node2D = $floatph
 
 @export var _speed: float = 100.0
 
@@ -17,11 +15,29 @@ var _speed_malus: float = 1.0
 var _is_sprinting = false
 var _is_aiming = false
 
+var MaxHealth :int = 100;
+var _health :int = MaxHealth
+var Health :int = _health : set = _set_health, get = _get_health
+func _set_health(value: int):
+	if value < 0:
+		_health = 0
+	else:
+		_health = value
+	
+	if _health == 0:
+		EventsBus.game_over.emit()
+		
+func _get_health():
+	return _health
+
 
 func _ready() -> void:
-	EventsBus.connect("player_event", self.trigger_floating_message)
+	EventsBus.player_event.connect(self.floating_message)
+	EventsBus.player_health_update.emit(Health, MaxHealth, 100, 100)
 	velocity = Vector2.ZERO
 
+func floating_message(message: String):
+	HudFactory.add_floating_text(message, ft_placeholder)
 
 func _physics_process(delta: float) -> void:
 	reset_conditions()
@@ -48,7 +64,7 @@ func _physics_process(delta: float) -> void:
 	handle_gun_controls()
 
 	if Input.is_action_just_released("q") and Hand.has_gun():
-		trigger_floating_message("%d / %d" % [Hand.check_ammo(), Hand.max_ammo()])
+		HudFactory.add_floating_text("%d / %d" % [Hand.check_ammo(), Hand.max_ammo()], ft_placeholder)
 
 	move_and_slide()
 	adjust_orientation()
@@ -66,7 +82,7 @@ func handle_gun_controls() -> void:
 	if not _is_sprinting and shoot_input and can_aim():
 		Hand.shoot()
 	elif not _is_sprinting and Input.is_action_just_released("reload"):
-		trigger_floating_message("Reloading")
+		HudFactory.add_floating_text("Reloading", ft_placeholder)
 		Hand.reload()
 
 	if Input.is_action_just_released("g"):
@@ -117,14 +133,13 @@ func get_walking_speed() -> float:
 	return 1.0
 
 
-func trigger_floating_message(message: String) -> void:
-	var t = ftext.instantiate()
-	floatph.add_child(t)
-	t.trigger(message)
-
-
 func _footstep_adjust() -> void:
 	$footstep.set_pitch_scale(randf_range(0.8, 1.8))
+
+func take_damage(dmg: int):
+	HudFactory.add_floating_critical("%d" % dmg , ft_placeholder)
+	Health -= dmg
+	EventsBus.player_health_update.emit(Health, MaxHealth, 100, 100)
 
 func emit_noise(level: Enums.NoiseLevel = Enums.NoiseLevel.Normal) -> void:
 	match level:

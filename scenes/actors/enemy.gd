@@ -4,9 +4,24 @@ const ACCEPTABLE_DISTANCE_TARGET = 109.0
 
 const PATROL_DISTANCE = 500
 
+var Dmg: int = 15
+var has_attacked: bool = false
+
 var MaxHealth :int = 100;
 var _health :int = MaxHealth
 var Health :int = _health : set = _set_health, get = _get_health
+func _set_health(value: int):
+	if value < 0:
+		_health = 0
+	else:
+		_health = value
+	
+	if _health == 0:
+		disable()
+		anim.play("die")
+		
+func _get_health():
+	return _health
 
 var _player_ref = null
 var _last_player_position = null
@@ -18,17 +33,15 @@ const RUN_SPEED : int = 200.0
 
 var state: Enums.AIState = Enums.AIState.Patrol
 
-
-@onready var ftext = preload("res://scenes/hud/floating_text.tscn")
-
 @onready var body: CollisionShape2D = $body
 @onready var head: CollisionShape2D = $head
 @onready var detector: Area2D = $player_detector
 @onready var ft_placeholder: Node2D = $placeholder
 @onready var anim: AnimationPlayer = $anim
 @onready var navigator: NavigationAgent2D = $navigation
-@onready var tick: Timer = $tick
 @onready var sprite: Sprite2D = $sprite
+@onready var tick: Timer = $tick
+@onready var reset: Timer = $reset
 
 const HEADSHOT_THRESHOLD: float = 23.0
 const BODYSHOT_THRESHOLD: float = 60.0
@@ -79,7 +92,7 @@ func hit(point: Vector2, base_dmg: float) -> void:
 	if head_d < HEADSHOT_THRESHOLD or head_d < body_d:
 		type = "Headshot!"
 		damage *= 2
-	message("%s - %d" % [type, damage])
+	HudFactory.add_floating_critical("%s - %d" % [type, damage], ft_placeholder)
 	Health -= damage
 
 func add_hole(hole: Node2D):
@@ -114,21 +127,6 @@ func _on_player_detector_body_entered(body: Node2D) -> void:
 		_change_state(Enums.AIState.Chase)
 		_last_player_position = body.global_position
 
-
-func _set_health(value: int):
-	if value < 0:
-		_health = 0
-	else:
-		_health = value
-	
-	if _health == 0:
-		disable()
-		anim.play("die")
-		
-func _get_health():
-	return _health
-
-
 func _on_player_detector_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_ref = null
@@ -136,7 +134,7 @@ func _on_player_detector_body_exited(body: Node2D) -> void:
 
 func _change_state(new_state: Enums.AIState)-> void:
 	state = new_state
-	message("state: %s" % Enums.ai_state_to_string(state))
+	HudFactory.add_floating_text("state: %s" % Enums.ai_state_to_string(state), ft_placeholder)
 	if state == Enums.AIState.Attack:
 		tick.wait_time = .5
 		tick.stop()
@@ -153,7 +151,12 @@ func _change_state(new_state: Enums.AIState)-> void:
 			pass
 
 func attack():
-	print_debug("ACTUAL ATTACK LOGIC")
+	if _player_ref and _player_ref.has_method("take_damage"):
+		if not has_attacked:
+			_player_ref.take_damage(Dice.roll(Dmg))
+			has_attacked = true
+			reset.start()
+			
 	
 func get_random_patrol_point():
 	return global_position + Vector2(randi_range(-PATROL_DISTANCE,PATROL_DISTANCE), randi_range(-PATROL_DISTANCE,PATROL_DISTANCE))
@@ -180,9 +183,7 @@ func check_target_reach():
 	elif _player_ref != null and distance < ACCEPTABLE_DISTANCE_TARGET:
 		_change_state(Enums.AIState.Attack)
 
-func message(msg: String):
-	var t = ftext.instantiate()
-	ft_placeholder.add_child(t)
-	t.trigger(msg)
 
 
+func _on_reset_timeout() -> void:
+	has_attacked = false

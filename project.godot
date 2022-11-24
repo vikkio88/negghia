@@ -20,6 +20,11 @@ _global_script_classes=[{
 "path": "res://scenes/items/weapon_pickable.gd"
 }, {
 "base": "RefCounted",
+"class": &"Dice",
+"language": &"GDScript",
+"path": "res://scripts/Dice.gd"
+}, {
+"base": "RefCounted",
 "class": &"Enums",
 "language": &"GDScript",
 "path": "res://scripts/Enums.gd"
@@ -27,6 +32,7 @@ _global_script_classes=[{
 _global_script_class_icons={
 "BaseWeapon": "",
 "BaseWeaponPickable": "",
+"Dice": "",
 "Enums": ""
 }
 
@@ -41,6 +47,7 @@ config/icon="res://icon.svg"
 
 EventsBus="*res://scripts/EventsBus.gd"
 ItemFactory="*res://scripts/ItemFactory.gd"
+HudFactory="*res://scripts/HudFactory.gd"
 
 [display]
 

@@ -18053,9 +18053,9 @@ pattern_1 = SubResource("TileMapPattern_aoklf")
 pattern_2 = SubResource("TileMapPattern_qgqkb")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rckvv"]
-vertices = PackedVector2Array(2023, -700, 2018, 1778, 1803, 866, 1800, 769, 1686, 787, 1282, 677, 1261, 207, -1606, 1762, 1693, 861, -1606, -685, 1042, 207, 516, 164, 1004, 439, 529, 383, 75, 167, 75, 372, 1109, 650)
-polygons = [PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5, 6), PackedInt32Array(2, 1, 7, 8), PackedInt32Array(9, 0, 6, 10, 11), PackedInt32Array(10, 12, 13, 11), PackedInt32Array(9, 11, 14), PackedInt32Array(7, 9, 14, 15), PackedInt32Array(8, 7, 15, 16), PackedInt32Array(5, 4, 8, 16), PackedInt32Array(13, 12, 16, 15)]
-outlines = [PackedVector2Array(-1606, -685, 2023, -700, 2018, 1778, -1606, 1762), PackedVector2Array(75, 167, 516, 164, 529, 383, 75, 372), PackedVector2Array(1042, 207, 1261, 207, 1282, 677, 1109, 650, 1004, 439), PackedVector2Array(1686, 787, 1693, 861, 1803, 866, 1800, 769)]
+vertices = PackedVector2Array(2023, -700, 1799, 753, 1681, 740, 1313, 693, 1281, 191, 2018, 1778, 1803, 866, -1606, 1762, 1693, 861, 1002, 197, 977, 448, 538, 404, 529, 140, -1606, -685, 40, 140, 59, 397, 1072, 693)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(0, 5, 6, 1), PackedInt32Array(6, 5, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 0, 4, 9, 12), PackedInt32Array(13, 12, 14), PackedInt32Array(7, 13, 14, 15), PackedInt32Array(3, 2, 8, 7, 16), PackedInt32Array(16, 7, 15, 11, 10)]
+outlines = [PackedVector2Array(-1606, -685, 2023, -700, 2018, 1778, -1606, 1762), PackedVector2Array(40, 140, 529, 140, 538, 404, 59, 397), PackedVector2Array(1002, 197, 1281, 191, 1313, 693, 1072, 693, 977, 448), PackedVector2Array(1681, 740, 1693, 861, 1803, 866, 1799, 753)]
 
 [node name="TestArea" type="Node2D"]
 script = ExtResource("1_kg0ib")

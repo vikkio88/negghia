@@ -10,15 +10,10 @@ extends Node2D
 var _enemy_count = 4
 var _max_enemies = 10
 
-func spawn_enemy():
-	var enemy = enemy_scene.instantiate()
-	enemy.global_position = spawn_point
-	enemies_node.add_child(enemy)
-
-
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(arrow, Input.CURSOR_ARROW, Vector2(15, 15))
-	EventsBus.connect("gun_dropped", self.spawn_gun)
+	EventsBus.game_over.connect(func(): print("Game Over"))
+	EventsBus.gun_dropped.connect(self.spawn_gun)
 
 
 func spawn_gun(type: Enums.Weapons, position: Vector2, ammo_left: int = 0):
@@ -31,3 +26,8 @@ func _on_tick_timeout() -> void:
 	_enemy_count = enemies_node.get_children().size()
 	if _enemy_count < _max_enemies:
 		spawn_enemy()
+
+func spawn_enemy():
+	var enemy = enemy_scene.instantiate()
+	enemy.global_position = spawn_point
+	enemies_node.add_child(enemy)

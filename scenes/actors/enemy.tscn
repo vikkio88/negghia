@@ -134,7 +134,11 @@ avoidance_enabled = true
 wait_time = 5.0
 autostart = true
 
+[node name="reset" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="player_detector" to="." method="_on_player_detector_area_entered"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
 [connection signal="body_exited" from="player_detector" to="." method="_on_player_detector_body_exited"]
 [connection signal="timeout" from="tick" to="." method="_on_tick_timeout"]
+[connection signal="timeout" from="reset" to="." method="_on_reset_timeout"]
