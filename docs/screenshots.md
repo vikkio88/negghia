@@ -46,5 +46,12 @@ Adding Pathfinder using Navigation2d and StateMachine for Enemy Ai
 ![aichase](https://user-images.githubusercontent.com/248805/203634610-5e4d1e25-36d0-4adb-92e5-625587822cbe.gif)
 
 
+## 24th November
+Worked on first Health/Stamina system and giving chasers ability to damage player
+
+![healthsys](https://user-images.githubusercontent.com/248805/203857022-53263710-2926-4bd2-821d-7d2fae47510a.gif)
+
+
+
 
 
