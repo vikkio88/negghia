@@ -317,7 +317,11 @@ libraries = {
 "": SubResource("AnimationLibrary_8e5du")
 }
 
+[node name="tick" type="Timer" parent="."]
+autostart = true
+
 [connection signal="body_entered" from="view" to="view" method="_on_body_in_viewcone"]
 [connection signal="body_exited" from="view" to="view" method="_on_body_exited_viewcone"]
 [connection signal="body_entered" from="close_view" to="view" method="_on_body_in_viewcone"]
 [connection signal="body_exited" from="close_view" to="view" method="_on_body_exited_viewcone"]
+[connection signal="timeout" from="tick" to="." method="_on_tick_timeout"]

@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 @onready var healthlbl: Label = $health
+@onready var healthbar: ProgressBar = $healthbar
+@onready var staminabar: ProgressBar = $staminabar
 
 @onready var interaction: Label = $action_key/interaction
 @onready var interaction_key: Label = $action_key
@@ -37,3 +39,7 @@ func interact():
 
 func health_update(health: int, max_health: int, stamina: int, max_stamina: int):
 	healthlbl.text = "%d / %d - %d / %d " % [health, max_health, stamina, max_stamina]
+	healthbar.max_value = max_health
+	healthbar.value = health
+	staminabar.max_value = max_stamina
+	staminabar.value = stamina

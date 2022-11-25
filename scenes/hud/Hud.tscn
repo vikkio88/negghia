@@ -38,6 +38,26 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 
 [node name="health" type="Label" parent="."]
+offset_top = 64.0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 92.0
 theme_override_font_sizes/font_size = 20
+
+[node name="healthbar" type="ProgressBar" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+offset_right = 184.0
+offset_bottom = 27.0
+size_flags_horizontal = 0
+step = 1.0
+rounded = true
+show_percentage = false
+
+[node name="staminabar" type="ProgressBar" parent="."]
+self_modulate = Color(0, 1, 0, 1)
+offset_top = 32.0
+offset_right = 184.0
+offset_bottom = 59.0
+size_flags_horizontal = 0
+step = 1.0
+rounded = true
+show_percentage = false
