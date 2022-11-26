@@ -5,7 +5,6 @@ const ACCEPTABLE_DISTANCE_TARGET = 109.0
 const PATROL_DISTANCE = 500
 
 var Dmg: int = 15
-var has_attacked: bool = false
 
 var MaxHealth :int = 100;
 var _health :int = MaxHealth
@@ -41,7 +40,6 @@ var state: Enums.AIState = Enums.AIState.Patrol
 @onready var navigator: NavigationAgent2D = $navigation
 @onready var sprite: Sprite2D = $sprite
 @onready var tick: Timer = $tick
-@onready var reset: Timer = $reset
 
 const HEADSHOT_THRESHOLD: float = 23.0
 const BODYSHOT_THRESHOLD: float = 60.0
@@ -102,6 +100,7 @@ func add_hole(hole: Node2D):
 # END OF ENEMY HITTING LOGIC
 
 func dead():
+	Utils.dispose_gated_timer("%s_enemy_attack" % get_instance_id())
 	queue_free()
 
 func disable() -> void:
@@ -152,12 +151,12 @@ func _change_state(new_state: Enums.AIState)-> void:
 
 func attack():
 	if _player_ref and _player_ref.has_method("take_damage"):
-		if not has_attacked:
-			_player_ref.take_damage(Dice.roll(Dmg))
-			has_attacked = true
-			reset.start()
-			
-	
+		Utils.gated_timer("%s_enemy_attack" % get_instance_id(), 1, self.damage_player)
+		
+func damage_player():
+	if _player_ref != null:
+		_player_ref.take_damage(Dice.roll(Dmg))
+
 func get_random_patrol_point():
 	return global_position + Vector2(randi_range(-PATROL_DISTANCE,PATROL_DISTANCE), randi_range(-PATROL_DISTANCE,PATROL_DISTANCE))
 
@@ -182,8 +181,3 @@ func check_target_reach():
 		_change_state(Enums.AIState.Idle)
 	elif _player_ref != null and distance < ACCEPTABLE_DISTANCE_TARGET:
 		_change_state(Enums.AIState.Attack)
-
-
-
-func _on_reset_timeout() -> void:
-	has_attacked = false

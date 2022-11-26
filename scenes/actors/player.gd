@@ -29,7 +29,6 @@ func _get_health():
 	return _health
 
 var _out_of_stamina = false
-var _is_consuming_stamina = false
 var MaxStamina: int = 100
 var _stamina:int = MaxStamina
 var Stamina:int = _stamina : set = _set_stamina, get = _get_stamina
@@ -140,9 +139,7 @@ func get_speed() -> float:
 
 func get_walking_speed() -> float:
 	if _is_sprinting:
-		if not _is_consuming_stamina:
-			_is_consuming_stamina = true
-			get_tree().create_timer(1).timeout.connect(self.consume_stamina)
+		Utils.gated_timer("player_consuming_stamina", 1, self.consume_stamina)
 		return 1.5
 	elif _is_aiming:
 		return .5
@@ -160,11 +157,10 @@ func take_damage(dmg: int):
 
 func consume_stamina():
 	Stamina -= Dice.roll(SPRINT_MAX_COST,SPRINT_MAX_COST / 2)
-	_is_consuming_stamina = false
 	emit_health_update()
 
 func recover():
-	if not _is_sprinting and not _is_consuming_stamina:
+	if not _is_sprinting and not Utils.get_gate_by_name("player_consuming_stamina"):
 		Stamina += Dice.roll(5)
 		emit_health_update()
 	
