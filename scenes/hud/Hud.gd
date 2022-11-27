@@ -27,15 +27,18 @@ func _on_interactable(item: String, action: String, callback: Callable):
 	interaction_key.visible = true
 	intereactable_callback = callback
 
+
 func _off_interactable():
 	interaction.text = ""
 	interaction_key.visible = false
 	can_interact = false
 	intereactable_callback = func(): pass
 
+
 func interact():
 	if can_interact:
 		intereactable_callback.call()
+
 
 func health_update(health: int, max_health: int, stamina: int, max_stamina: int):
 	healthlbl.text = "%d / %d - %d / %d " % [health, max_health, stamina, max_stamina]

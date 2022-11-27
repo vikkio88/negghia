@@ -32,6 +32,7 @@ func _physics_process(delta):
 	if position.distance_to(_to_pos) <= 3:
 		_dropping = false
 
+
 func pick_up() -> void:
 	if _dropping:
 		return
@@ -45,7 +46,6 @@ func _on_playerdetector_area_entered(area: Area2D) -> void:
 			EventsBus
 			. emit_signal("interactable_on", Enums.weapon_to_string(type), "Pickup", self.pick_up)
 		)
-		
 
 
 func _on_playerdetector_area_exited(area: Area2D) -> void:

@@ -5,10 +5,11 @@ extends Node2D
 @onready var enemy_scene = preload("res://scenes/actors/enemy.tscn")
 
 @onready var enemies_node: Node = $MapNavigation/enemies
-@onready var spawn_point : Vector2 = $spawn_point.position
+@onready var spawn_point: Vector2 = $spawn_point.position
 
 var _enemy_count = 4
 var _max_enemies = 10
+
 
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(arrow, Input.CURSOR_ARROW, Vector2(15, 15))
@@ -26,6 +27,7 @@ func _on_tick_timeout() -> void:
 	_enemy_count = enemies_node.get_children().size()
 	if _enemy_count < _max_enemies:
 		spawn_enemy()
+
 
 func spawn_enemy():
 	var enemy = enemy_scene.instantiate()
