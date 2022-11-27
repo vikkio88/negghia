@@ -65,11 +65,10 @@ func _physics_process(delta: float) -> void:
 		if _player_ref == null or position.distance_to(point) > ACCEPTABLE_DISTANCE_TARGET:
 			_change_state(Enums.AIState.Chase)
 		return
-	
+
 	if state == Enums.AIState.Idle:
 		anim.play("idle")
 		return
-
 
 	var point = get_target()
 	navigator.target_location = point
