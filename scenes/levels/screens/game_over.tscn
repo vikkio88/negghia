@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjk6tqj5f4w22"]
+
+[ext_resource type="Script" path="res://scenes/levels/screens/game_over.gd" id="1_fnfk3"]
+
+[sub_resource type="Texture2D" id="Texture2D_rv5sh"]
+resource_local_to_scene = false
+resource_name = ""
+
+[node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_fnfk3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("Texture2D_rv5sh")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -13.0
+offset_right = 43.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Game Over"
+
+[node name="Restart" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Restart"
+
+[connection signal="button_up" from="Restart" to="." method="_on_restart_button_up"]

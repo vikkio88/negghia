@@ -13,7 +13,7 @@ var _max_enemies = 10
 
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(arrow, Input.CURSOR_ARROW, Vector2(15, 15))
-	EventsBus.game_over.connect(func(): print("Game Over"))
+	EventsBus.game_over.connect(func(): get_tree().change_scene_to_file("res://scenes/levels/screens/game_over.tscn"))
 	EventsBus.gun_dropped.connect(self.spawn_gun)
 
 

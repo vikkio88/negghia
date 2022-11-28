@@ -20,6 +20,7 @@ func _set_health(value: int):
 		_health = value
 
 	if _health == 0:
+		GameState.stat_update.emit(GameState.Stats.Kills)
 		disable()
 		anim.play("die")
 
@@ -61,6 +62,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if state == Enums.AIState.Attack:
+		anim.play("attack")
 		var point = get_target()
 		if _player_ref == null or position.distance_to(point) > ACCEPTABLE_DISTANCE_TARGET:
 			_change_state(Enums.AIState.Chase)
@@ -98,12 +100,17 @@ func get_target():
 
 # STARTING ENEMY HITTING LOGIC
 func hit(point: Vector2, base_dmg: float) -> void:
+	if Health == 0:
+		return
+
+	GameState.stat_update.emit(GameState.Stats.Hits)
 	var head_d = head.global_position.distance_to(point)
 	var body_d = body.global_position.distance_to(point)
 	var type = "body shot"
 	var damage = base_dmg
 	if head_d < HEADSHOT_THRESHOLD or head_d < body_d:
 		type = "Headshot!"
+		GameState.stat_update.emit(GameState.Stats.Headshots)
 		damage *= 2
 	HudFactory.add_floating_critical("%s - %d" % [type, damage], ft_placeholder)
 	Health -= damage

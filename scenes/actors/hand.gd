@@ -42,6 +42,7 @@ func shoot() -> void:
 
 func _apply_recoil(recoil: Vector2) -> void:
 	if recoil != Vector2.ZERO:
+		GameState.stat_update.emit(GameState.Stats.Shots)
 		Player.emit_noise(Enums.NoiseLevel.Loud)
 		var mouse_pos = get_viewport().get_mouse_position()
 		get_viewport().warp_mouse(mouse_pos + recoil)
