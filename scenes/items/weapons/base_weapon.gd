@@ -110,7 +110,10 @@ func has_ammo() -> bool:
 
 
 func reload_start() -> void:
+	if _is_reloading:
+		return
 	_is_reloading = true
+	EventsBus.emit_signal("player_event", "Reloading...")
 	anim.play("reload")
 
 

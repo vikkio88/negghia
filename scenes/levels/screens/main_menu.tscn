@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg7aolb765h6m"]
+
+[ext_resource type="Script" path="res://scenes/levels/screens/main_menu.gd" id="1_0av4b"]
+
+[node name="main_menu" type="CanvasLayer"]
+script = ExtResource("1_0av4b")
+
+[node name="title" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.034
+offset_left = -16.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 24.05
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "Negghia"
+horizontal_alignment = 1
+
+[node name="vbox" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -267.0
+offset_right = 81.0
+offset_bottom = -163.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="test_room" type="Button" parent="vbox"]
+offset_right = 161.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 30
+text = "Test Room
+"
+
+[node name="HSeparator" type="HSeparator" parent="vbox"]
+offset_top = 54.0
+offset_right = 161.0
+offset_bottom = 58.0
+
+[node name="exit" type="Button" parent="vbox"]
+offset_top = 62.0
+offset_right = 161.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 30
+text = "Exit
+"
+
+[connection signal="button_up" from="vbox/test_room" to="." method="_on_test_room_button_up"]
+[connection signal="button_up" from="vbox/exit" to="." method="_on_exit_button_up"]

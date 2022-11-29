@@ -36,11 +36,12 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 
-[node name="health" type="Label" parent="."]
+[node name="info" type="Label" parent="."]
+offset_left = 5.0
 offset_top = 64.0
-offset_right = 40.0
-offset_bottom = 92.0
-theme_override_font_sizes/font_size = 20
+offset_right = 184.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 30
 
 [node name="healthbar" type="ProgressBar" parent="."]
 self_modulate = Color(1, 0, 0, 1)
@@ -60,3 +61,15 @@ size_flags_horizontal = 0
 step = 1.0
 rounded = true
 show_percentage = false
+
+[node name="game_event" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 80.0
+offset_right = 250.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1

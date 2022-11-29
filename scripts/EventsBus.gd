@@ -1,6 +1,8 @@
 extends Node
 
 signal game_over()
+signal game_event(message: String)
+signal game_info(text: String)
 
 signal interactable_on(item: String, action: String, callback: Callable)
 signal interactable_off(callback: Callable)

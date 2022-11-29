@@ -1,8 +1,10 @@
 extends CanvasLayer
 
-@onready var healthlbl: Label = $health
+@onready var infolbl: Label = $info
 @onready var healthbar: ProgressBar = $healthbar
 @onready var staminabar: ProgressBar = $staminabar
+
+@onready var game_eventlbl: Label = $game_event
 
 @onready var interaction: Label = $action_key/interaction
 @onready var interaction_key: Label = $action_key
@@ -14,6 +16,8 @@ func _ready() -> void:
 	EventsBus.interactable_on.connect(self._on_interactable)
 	EventsBus.interactable_off.connect(self._off_interactable)
 	EventsBus.player_health_update.connect(self.health_update)
+	EventsBus.game_event.connect(self.game_event)
+	EventsBus.game_info.connect(self.game_info)
 
 
 func _process(delta: float) -> void:
@@ -41,8 +45,14 @@ func interact():
 
 
 func health_update(health: int, max_health: int, stamina: int, max_stamina: int):
-	healthlbl.text = "%d / %d - %d / %d " % [health, max_health, stamina, max_stamina]
 	healthbar.max_value = max_health
 	healthbar.value = health
 	staminabar.max_value = max_stamina
 	staminabar.value = stamina
+
+func game_event(message: String):
+	game_eventlbl.text = message
+	Utils.timer(2, func(): game_eventlbl.text = "")
+
+func game_info(text: String):
+	infolbl.text = text

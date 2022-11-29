@@ -18132,8 +18132,12 @@ position = Vector2(1132, 237)
 [node name="dummy2" parent="dummies" instance=ExtResource("2_f870b")]
 position = Vector2(1244, 484)
 
-[node name="tick" type="Timer" parent="."]
-wait_time = 5.0
+[node name="wave_reset" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
 autostart = true
 
+[node name="tick" type="Timer" parent="."]
+
+[connection signal="timeout" from="wave_reset" to="." method="_on_wave_reset_timeout"]
 [connection signal="timeout" from="tick" to="." method="_on_tick_timeout"]

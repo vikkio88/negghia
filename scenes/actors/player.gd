@@ -111,7 +111,6 @@ func handle_gun_controls() -> void:
 	if not _is_sprinting and shoot_input and can_aim():
 		Hand.shoot()
 	elif not _is_sprinting and Input.is_action_just_released("reload"):
-		HudFactory.add_floating_text("Reloading", ft_placeholder)
 		Hand.reload()
 
 	if Input.is_action_just_released("g"):
