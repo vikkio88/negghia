@@ -50,9 +50,11 @@ func health_update(health: int, max_health: int, stamina: int, max_stamina: int)
 	staminabar.max_value = max_stamina
 	staminabar.value = stamina
 
+
 func game_event(message: String):
 	game_eventlbl.text = message
 	Utils.timer(2, func(): game_eventlbl.text = "")
+
 
 func game_info(text: String):
 	infolbl.text = text

@@ -17,6 +17,7 @@ var _wave_length = 15
 var _wave_mod = 3
 var _ticks = 0
 
+
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(arrow, Input.CURSOR_ARROW, Vector2(15, 15))
 	(
@@ -47,23 +48,24 @@ func _on_tick_timeout() -> void:
 		return
 	spawn_enemy()
 
+
 func wave_finished():
 	update_game_info()
 	tick.stop()
-	
+
 	if get_enemy_count() > 0:
 		print_debug("we still have enemies left %d" % get_enemy_count())
 		Utils.timer(1, self.wave_finished)
 		return
-	
-	EventsBus.game_event.emit("Wave %d finished" % _wave_count)	
+
+	EventsBus.game_event.emit("Wave %d finished" % _wave_count)
 	_ticks = 0
 	_wave_count += 1
 	var new_mod = _wave_mod - 2
 	_wave_mod = clampi(new_mod, 1, 5)
-	
+
 	wave_reset.start()
-	
+
 
 func spawn_enemy():
 	print_debug("wave might spawn %d" % _ticks)
@@ -78,8 +80,19 @@ func _on_wave_reset_timeout() -> void:
 	EventsBus.game_event.emit("Wave %d" % _wave_count)
 	tick.start()
 
+
 func get_enemy_count() -> int:
 	return enemies_node.get_children().size()
 
+
 func update_game_info():
-	EventsBus.game_info.emit("wave %d\ntime left : %d\nenemies: %d / %d" % [_wave_count, _wave_length - _ticks, get_enemy_count(), _max_enemies])
+	(
+		EventsBus
+		. game_info
+		. emit(
+			(
+				"wave %d\ntime left : %d\nenemies: %d / %d"
+				% [_wave_count, _wave_length - _ticks, get_enemy_count(), _max_enemies]
+			)
+		)
+	)
