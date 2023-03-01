@@ -73,8 +73,9 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var point = get_target()
-	navigator.target_location = point
-	var location = navigator.get_next_location()
+	
+	navigator.target_position = point
+	var location = navigator.get_next_path_position()
 
 	var speed = RUN_SPEED if _last_player_position != null else WALK_SPEED
 	var direction = position.direction_to(location)

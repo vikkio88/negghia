@@ -18054,8 +18054,8 @@ pattern_2 = SubResource("TileMapPattern_qgqkb")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rckvv"]
 vertices = PackedVector2Array(2023, -700, 1799, 753, 1681, 740, 1313, 693, 1281, 191, 2018, 1778, 1803, 866, -1606, 1762, 1693, 861, 1002, 197, 977, 448, 538, 404, 529, 140, -1606, -685, 40, 140, 59, 397, 1072, 693)
-polygons = [PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(0, 5, 6, 1), PackedInt32Array(6, 5, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 0, 4, 9, 12), PackedInt32Array(13, 12, 14), PackedInt32Array(7, 13, 14, 15), PackedInt32Array(3, 2, 8, 7, 16), PackedInt32Array(16, 7, 15, 11, 10)]
-outlines = [PackedVector2Array(-1606, -685, 2023, -700, 2018, 1778, -1606, 1762), PackedVector2Array(40, 140, 529, 140, 538, 404, 59, 397), PackedVector2Array(1002, 197, 1281, 191, 1313, 693, 1072, 693, 977, 448), PackedVector2Array(1681, 740, 1693, 861, 1803, 866, 1799, 753)]
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(0, 5, 6, 1), PackedInt32Array(6, 5, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 0, 4, 9, 12), PackedInt32Array(13, 12, 14), PackedInt32Array(7, 13, 14, 15), PackedInt32Array(3, 2, 8, 7, 16), PackedInt32Array(16, 7, 15, 11, 10)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1606, -685, 2023, -700, 2018, 1778, -1606, 1762), PackedVector2Array(40, 140, 529, 140, 538, 404, 59, 397), PackedVector2Array(1002, 197, 1281, 191, 1313, 693, 1072, 693, 977, 448), PackedVector2Array(1681, 740, 1693, 861, 1803, 866, 1799, 753)])
 
 [node name="TestArea" type="Node2D"]
 script = ExtResource("1_kg0ib")
@@ -18088,7 +18088,7 @@ layer_2/tile_data = PackedInt32Array(852005, 1835012, 1, 917541, 1835012, 2, 983
 
 [node name="MapNavigation" type="NavigationRegion2D" parent="."]
 position = Vector2(40, -66)
-navpoly = SubResource("NavigationPolygon_rckvv")
+navigation_polygon = SubResource("NavigationPolygon_rckvv")
 
 [node name="enemies" type="Node" parent="MapNavigation"]
 
@@ -18098,23 +18098,22 @@ position = Vector2(788, -142)
 [node name="items" type="Node2D" parent="."]
 
 [node name="rifle_pickup" parent="items" instance=ExtResource("5_msw1w")]
-position = Vector2(167, 222)
 z_index = 0
+position = Vector2(167, 222)
 
 [node name="m4a1_pickable" parent="items" instance=ExtResource("6_biyre")]
-position = Vector2(322, 218)
 z_index = 0
+position = Vector2(322, 218)
 
 [node name="pistol_pickup" parent="items" instance=ExtResource("8_68k0u")]
-position = Vector2(485, 218)
 z_index = 0
+position = Vector2(485, 218)
 
 [node name="player" parent="." instance=ExtResource("1_5q1xi")]
 position = Vector2(-24, 514)
 
 [node name="main_camera" type="Camera2D" parent="player"]
 position = Vector2(0, -200)
-current = true
 
 [node name="Hud" parent="player/main_camera" instance=ExtResource("4_25clx")]
 

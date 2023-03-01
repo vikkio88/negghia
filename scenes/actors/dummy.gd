@@ -32,9 +32,9 @@ func add_hole(hole: Node2D):
 # END OF ENEMY HITTING LOGIC
 
 
-func show():
+func show_sprite():
 	sprite.modulate.a = 1
 
 
-func hide():
+func hide_sprite():
 	sprite.modulate.a = 0
